@@ -79,6 +79,7 @@
             this.par2 = new System.Windows.Forms.PictureBox();
             this.par1 = new System.Windows.Forms.PictureBox();
             this.dummy = new AxWMPLib.AxWindowsMediaPlayer();
+            this.fade = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.Select)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PlaySpeedValue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PlaySpeed)).BeginInit();
@@ -121,6 +122,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.par2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.par1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dummy)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fade)).BeginInit();
             this.SuspendLayout();
             // 
             // Select
@@ -223,7 +225,7 @@
             // Thumbnail1
             // 
             this.Thumbnail1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.Thumbnail1.Location = new System.Drawing.Point(12, 733);
+            this.Thumbnail1.Location = new System.Drawing.Point(12, 726);
             this.Thumbnail1.Name = "Thumbnail1";
             this.Thumbnail1.Size = new System.Drawing.Size(1590, 97);
             this.Thumbnail1.TabIndex = 100;
@@ -232,7 +234,7 @@
             // Thumbnail2
             // 
             this.Thumbnail2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.Thumbnail2.Location = new System.Drawing.Point(12, 836);
+            this.Thumbnail2.Location = new System.Drawing.Point(12, 829);
             this.Thumbnail2.Name = "Thumbnail2";
             this.Thumbnail2.Size = new System.Drawing.Size(1590, 97);
             this.Thumbnail2.TabIndex = 100;
@@ -241,7 +243,7 @@
             // Thumbnail3
             // 
             this.Thumbnail3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.Thumbnail3.Location = new System.Drawing.Point(12, 939);
+            this.Thumbnail3.Location = new System.Drawing.Point(12, 932);
             this.Thumbnail3.Name = "Thumbnail3";
             this.Thumbnail3.Size = new System.Drawing.Size(1590, 97);
             this.Thumbnail3.TabIndex = 100;
@@ -249,9 +251,9 @@
             // 
             // Create
             // 
-            this.Create.Location = new System.Drawing.Point(1608, 936);
+            this.Create.Location = new System.Drawing.Point(1608, 932);
             this.Create.Name = "Create";
-            this.Create.Size = new System.Drawing.Size(284, 100);
+            this.Create.Size = new System.Drawing.Size(284, 97);
             this.Create.TabIndex = 13;
             this.Create.TabStop = false;
             this.Create.Click += new System.EventHandler(this.Create_Click);
@@ -280,7 +282,7 @@
             // 
             // top1
             // 
-            this.top1.Location = new System.Drawing.Point(392, 486);
+            this.top1.Location = new System.Drawing.Point(392, 483);
             this.top1.Name = "top1";
             this.top1.Size = new System.Drawing.Size(150, 75);
             this.top1.TabIndex = 101;
@@ -289,7 +291,7 @@
             // 
             // top2
             // 
-            this.top2.Location = new System.Drawing.Point(560, 486);
+            this.top2.Location = new System.Drawing.Point(560, 483);
             this.top2.Name = "top2";
             this.top2.Size = new System.Drawing.Size(150, 75);
             this.top2.TabIndex = 102;
@@ -298,7 +300,7 @@
             // 
             // top3
             // 
-            this.top3.Location = new System.Drawing.Point(728, 486);
+            this.top3.Location = new System.Drawing.Point(728, 483);
             this.top3.Name = "top3";
             this.top3.Size = new System.Drawing.Size(150, 75);
             this.top3.TabIndex = 103;
@@ -307,7 +309,7 @@
             // 
             // top4
             // 
-            this.top4.Location = new System.Drawing.Point(896, 486);
+            this.top4.Location = new System.Drawing.Point(896, 483);
             this.top4.Name = "top4";
             this.top4.Size = new System.Drawing.Size(150, 75);
             this.top4.TabIndex = 104;
@@ -316,7 +318,7 @@
             // 
             // top5
             // 
-            this.top5.Location = new System.Drawing.Point(1064, 486);
+            this.top5.Location = new System.Drawing.Point(1064, 483);
             this.top5.Name = "top5";
             this.top5.Size = new System.Drawing.Size(150, 75);
             this.top5.TabIndex = 105;
@@ -325,7 +327,7 @@
             // 
             // top6
             // 
-            this.top6.Location = new System.Drawing.Point(1232, 486);
+            this.top6.Location = new System.Drawing.Point(1232, 483);
             this.top6.Name = "top6";
             this.top6.Size = new System.Drawing.Size(150, 75);
             this.top6.TabIndex = 106;
@@ -334,7 +336,7 @@
             // 
             // top7
             // 
-            this.top7.Location = new System.Drawing.Point(1400, 486);
+            this.top7.Location = new System.Drawing.Point(1400, 483);
             this.top7.Name = "top7";
             this.top7.Size = new System.Drawing.Size(150, 75);
             this.top7.TabIndex = 107;
@@ -343,7 +345,7 @@
             // 
             // top8
             // 
-            this.top8.Location = new System.Drawing.Point(1568, 486);
+            this.top8.Location = new System.Drawing.Point(1568, 483);
             this.top8.Name = "top8";
             this.top8.Size = new System.Drawing.Size(150, 75);
             this.top8.TabIndex = 108;
@@ -352,7 +354,7 @@
             // 
             // top9
             // 
-            this.top9.Location = new System.Drawing.Point(1737, 486);
+            this.top9.Location = new System.Drawing.Point(1737, 483);
             this.top9.Name = "top9";
             this.top9.Size = new System.Drawing.Size(150, 75);
             this.top9.TabIndex = 109;
@@ -361,7 +363,7 @@
             // 
             // top0
             // 
-            this.top0.Location = new System.Drawing.Point(224, 486);
+            this.top0.Location = new System.Drawing.Point(224, 483);
             this.top0.Name = "top0";
             this.top0.Size = new System.Drawing.Size(150, 75);
             this.top0.TabIndex = 110;
@@ -370,7 +372,7 @@
             // 
             // org0
             // 
-            this.org0.Location = new System.Drawing.Point(224, 567);
+            this.org0.Location = new System.Drawing.Point(224, 564);
             this.org0.Name = "org0";
             this.org0.Size = new System.Drawing.Size(150, 75);
             this.org0.TabIndex = 120;
@@ -379,7 +381,7 @@
             // 
             // org9
             // 
-            this.org9.Location = new System.Drawing.Point(1737, 567);
+            this.org9.Location = new System.Drawing.Point(1737, 564);
             this.org9.Name = "org9";
             this.org9.Size = new System.Drawing.Size(150, 75);
             this.org9.TabIndex = 119;
@@ -388,7 +390,7 @@
             // 
             // org8
             // 
-            this.org8.Location = new System.Drawing.Point(1568, 567);
+            this.org8.Location = new System.Drawing.Point(1568, 564);
             this.org8.Name = "org8";
             this.org8.Size = new System.Drawing.Size(150, 75);
             this.org8.TabIndex = 118;
@@ -397,7 +399,7 @@
             // 
             // org7
             // 
-            this.org7.Location = new System.Drawing.Point(1400, 567);
+            this.org7.Location = new System.Drawing.Point(1400, 564);
             this.org7.Name = "org7";
             this.org7.Size = new System.Drawing.Size(150, 75);
             this.org7.TabIndex = 117;
@@ -406,7 +408,7 @@
             // 
             // org6
             // 
-            this.org6.Location = new System.Drawing.Point(1232, 567);
+            this.org6.Location = new System.Drawing.Point(1232, 564);
             this.org6.Name = "org6";
             this.org6.Size = new System.Drawing.Size(150, 75);
             this.org6.TabIndex = 116;
@@ -415,7 +417,7 @@
             // 
             // org5
             // 
-            this.org5.Location = new System.Drawing.Point(1064, 567);
+            this.org5.Location = new System.Drawing.Point(1064, 564);
             this.org5.Name = "org5";
             this.org5.Size = new System.Drawing.Size(150, 75);
             this.org5.TabIndex = 115;
@@ -424,7 +426,7 @@
             // 
             // org4
             // 
-            this.org4.Location = new System.Drawing.Point(896, 567);
+            this.org4.Location = new System.Drawing.Point(896, 564);
             this.org4.Name = "org4";
             this.org4.Size = new System.Drawing.Size(150, 75);
             this.org4.TabIndex = 114;
@@ -433,7 +435,7 @@
             // 
             // org3
             // 
-            this.org3.Location = new System.Drawing.Point(728, 567);
+            this.org3.Location = new System.Drawing.Point(728, 564);
             this.org3.Name = "org3";
             this.org3.Size = new System.Drawing.Size(150, 75);
             this.org3.TabIndex = 113;
@@ -442,7 +444,7 @@
             // 
             // org2
             // 
-            this.org2.Location = new System.Drawing.Point(560, 567);
+            this.org2.Location = new System.Drawing.Point(560, 564);
             this.org2.Name = "org2";
             this.org2.Size = new System.Drawing.Size(150, 75);
             this.org2.TabIndex = 112;
@@ -451,7 +453,7 @@
             // 
             // org1
             // 
-            this.org1.Location = new System.Drawing.Point(392, 567);
+            this.org1.Location = new System.Drawing.Point(392, 564);
             this.org1.Name = "org1";
             this.org1.Size = new System.Drawing.Size(150, 75);
             this.org1.TabIndex = 111;
@@ -460,7 +462,7 @@
             // 
             // par0
             // 
-            this.par0.Location = new System.Drawing.Point(224, 648);
+            this.par0.Location = new System.Drawing.Point(224, 645);
             this.par0.Name = "par0";
             this.par0.Size = new System.Drawing.Size(150, 75);
             this.par0.TabIndex = 130;
@@ -469,7 +471,7 @@
             // 
             // par9
             // 
-            this.par9.Location = new System.Drawing.Point(1737, 648);
+            this.par9.Location = new System.Drawing.Point(1737, 645);
             this.par9.Name = "par9";
             this.par9.Size = new System.Drawing.Size(150, 75);
             this.par9.TabIndex = 129;
@@ -478,7 +480,7 @@
             // 
             // par8
             // 
-            this.par8.Location = new System.Drawing.Point(1568, 648);
+            this.par8.Location = new System.Drawing.Point(1568, 645);
             this.par8.Name = "par8";
             this.par8.Size = new System.Drawing.Size(150, 75);
             this.par8.TabIndex = 128;
@@ -487,7 +489,7 @@
             // 
             // par7
             // 
-            this.par7.Location = new System.Drawing.Point(1400, 648);
+            this.par7.Location = new System.Drawing.Point(1400, 645);
             this.par7.Name = "par7";
             this.par7.Size = new System.Drawing.Size(150, 75);
             this.par7.TabIndex = 127;
@@ -496,7 +498,7 @@
             // 
             // par6
             // 
-            this.par6.Location = new System.Drawing.Point(1232, 648);
+            this.par6.Location = new System.Drawing.Point(1232, 645);
             this.par6.Name = "par6";
             this.par6.Size = new System.Drawing.Size(150, 75);
             this.par6.TabIndex = 126;
@@ -505,7 +507,7 @@
             // 
             // par5
             // 
-            this.par5.Location = new System.Drawing.Point(1064, 648);
+            this.par5.Location = new System.Drawing.Point(1064, 645);
             this.par5.Name = "par5";
             this.par5.Size = new System.Drawing.Size(150, 75);
             this.par5.TabIndex = 125;
@@ -514,7 +516,7 @@
             // 
             // par4
             // 
-            this.par4.Location = new System.Drawing.Point(896, 648);
+            this.par4.Location = new System.Drawing.Point(896, 645);
             this.par4.Name = "par4";
             this.par4.Size = new System.Drawing.Size(150, 75);
             this.par4.TabIndex = 124;
@@ -523,7 +525,7 @@
             // 
             // par3
             // 
-            this.par3.Location = new System.Drawing.Point(728, 648);
+            this.par3.Location = new System.Drawing.Point(728, 645);
             this.par3.Name = "par3";
             this.par3.Size = new System.Drawing.Size(150, 75);
             this.par3.TabIndex = 123;
@@ -532,7 +534,7 @@
             // 
             // par2
             // 
-            this.par2.Location = new System.Drawing.Point(560, 648);
+            this.par2.Location = new System.Drawing.Point(560, 645);
             this.par2.Name = "par2";
             this.par2.Size = new System.Drawing.Size(150, 75);
             this.par2.TabIndex = 122;
@@ -541,7 +543,7 @@
             // 
             // par1
             // 
-            this.par1.Location = new System.Drawing.Point(392, 648);
+            this.par1.Location = new System.Drawing.Point(392, 645);
             this.par1.Name = "par1";
             this.par1.Size = new System.Drawing.Size(150, 75);
             this.par1.TabIndex = 121;
@@ -557,12 +559,22 @@
             this.dummy.Size = new System.Drawing.Size(75, 23);
             this.dummy.TabIndex = 131;
             // 
+            // fade
+            // 
+            this.fade.Location = new System.Drawing.Point(1608, 829);
+            this.fade.Name = "fade";
+            this.fade.Size = new System.Drawing.Size(284, 97);
+            this.fade.TabIndex = 132;
+            this.fade.TabStop = false;
+            this.fade.Click += new System.EventHandler(this.fade_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1904, 1041);
+            this.Controls.Add(this.fade);
             this.Controls.Add(this.par0);
             this.Controls.Add(this.par9);
             this.Controls.Add(this.par8);
@@ -653,6 +665,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.par2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.par1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dummy)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fade)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -709,6 +722,7 @@
         private System.Windows.Forms.PictureBox par2;
         private System.Windows.Forms.PictureBox par1;
         private AxWMPLib.AxWindowsMediaPlayer dummy;
+        private System.Windows.Forms.PictureBox fade;
 
     }
 }

@@ -40,15 +40,15 @@ namespace WorkShop
             PlaySpeedValue.SizeMode = PictureBoxSizeMode.StretchImage;
             Select.SizeMode = PictureBoxSizeMode.StretchImage;
             Create.SizeMode = PictureBoxSizeMode.StretchImage;
-            //pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            fade.SizeMode = PictureBoxSizeMode.StretchImage;
 
             Play.ImageLocation = @"C:\play_off.png";
             Stop.ImageLocation = @"C:\stop.png";
             PlaySpeed.ImageLocation = @"C:\playspeed.png";
             PlaySpeedValue.ImageLocation = @"C:\1.png";
-            Select.ImageLocation = @"C:\selectmovie.jpg";
-            Create.ImageLocation = @"C:\makemovie.jpg";
-            //pictureBox1.ImageLocation = @"C:\frame.png";
+            Select.ImageLocation = @"C:\select.png";
+            Create.ImageLocation = @"C:\create.png";
+            fade.ImageLocation = @"C:\fade.png";
         }
 
         Image createThumbnail(Image image, int w, int h)
@@ -164,12 +164,16 @@ namespace WorkShop
 
 
         string command = "-i C:\\ffmpeg\\bin\\movie\\output1.mp4 ";
+
         private void Create_Click(object sender, EventArgs e)
         {
             int count_all = count_top + count_org + count_par;
+            System.Diagnostics.Process p = new System.Diagnostics.Process();
+            p.StartInfo.CreateNoWindow = true;
             
             for (int i = 1; i < count_all; i++)
             {
+
                 if (i >= 2)
                 {
                     command = command + "-i C:\\ffmpeg\\bin\\movie\\output" + i + ".mp4 ";
@@ -222,7 +226,9 @@ namespace WorkShop
                 
             string START = start.ToString();
             string END = end.ToString();
-            string command = @"-i C:\\ffmpeg\\bin\\top.mp4 -t 4 -ss " + START + " C:\\ffmpeg\\bin\\movie\\output" + count + ".mp4";
+            string command = @"-i C:\\ffmpeg\\bin\\top.mp4 -t 4 -ss " + START + " C:\\ffmpeg\\bin\\movie\\input" + count + ".mp4";
+            System.Diagnostics.Process p = new System.Diagnostics.Process();
+            p.StartInfo.CreateNoWindow = true;
             System.Diagnostics.Process.Start("C:\\ffmpeg\\bin\\ffmpeg", command);
             count = count + 1;
             this.ActiveControl = this.dummy;
@@ -269,7 +275,9 @@ namespace WorkShop
                 
             string START = start.ToString();
             string END = end.ToString();
-            string command = @"-i C:\\ffmpeg\\bin\\top.mp4 -t 4 -ss " + START + " C:\\ffmpeg\\bin\\movie\\output" + count + ".mp4";
+            string command = @"-i C:\\ffmpeg\\bin\\top.mp4 -t 4 -ss " + START + " C:\\ffmpeg\\bin\\movie\\input" + count + ".mp4";
+            System.Diagnostics.Process p = new System.Diagnostics.Process();
+            p.StartInfo.CreateNoWindow = true;
             System.Diagnostics.Process.Start("C:\\ffmpeg\\bin\\ffmpeg", command);
             count = count + 1;
             this.ActiveControl = this.dummy;
@@ -317,7 +325,9 @@ namespace WorkShop
             string START = start.ToString();
             string END = end.ToString();
             
-            string command = @"-i C:\\ffmpeg\\bin\\par.mp4 -t 4 -ss " + START + " C:\\ffmpeg\\bin\\movie\\output" + count + ".mp4";
+            string command = @"-i C:\\ffmpeg\\bin\\par.mp4 -t 4 -ss " + START + " C:\\ffmpeg\\bin\\movie\\input" + count + ".mp4";
+            System.Diagnostics.Process p = new System.Diagnostics.Process();
+            p.StartInfo.CreateNoWindow = true;
             System.Diagnostics.Process.Start("C:\\ffmpeg\\bin\\ffmpeg", command);
             count = count + 1;
             this.ActiveControl = this.dummy;
@@ -717,6 +727,16 @@ namespace WorkShop
             else if (trackBar1.Value == 8)
             {
                 PlaySpeedValue.ImageLocation = @"C:\8.png";
+            }
+        }
+
+        private void fade_Click(object sender, EventArgs e)
+        {
+            int count_all = count_top + count_org + count_par;
+            System.Diagnostics.Process p = new System.Diagnostics.Process();
+            p.StartInfo.CreateNoWindow = true;
+            for (int i = 1; i <= count_all; i++){
+                System.Diagnostics.Process.Start("C:\\ffmpeg\\bin\\ffmpeg", @" -i C:\\ffmpeg\\bin\\movie\\input" + i + ".mp4 -vf fade=in:0:15,fade=out:101:15 C:\\ffmpeg\\bin\\movie\\output" + i + ".mp4");
             }
         }
     }
