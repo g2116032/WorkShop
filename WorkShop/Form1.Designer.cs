@@ -556,7 +556,7 @@
             this.dummy.Location = new System.Drawing.Point(508, 220);
             this.dummy.Name = "dummy";
             this.dummy.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("dummy.OcxState")));
-            this.dummy.Size = new System.Drawing.Size(75, 23);
+            this.dummy.Size = new System.Drawing.Size(1, 1);
             this.dummy.TabIndex = 131;
             // 
             // fade
@@ -623,6 +623,7 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.Resize += new System.EventHandler(this.Form1_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.Select)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PlaySpeedValue)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PlaySpeed)).EndInit();
