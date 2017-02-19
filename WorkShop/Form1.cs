@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WMPLib;
 
 namespace WorkShop
 {
@@ -21,211 +22,18 @@ namespace WorkShop
         int count_top = 0;
         int count_org = 0;
         int count_par = 0;
-        int count = 1;
+        int count = 0;
+        WindowsMediaPlayer player;
 
         public Form1()
         {
             InitializeComponent();
+            musicList.Items.Add("情熱大陸OP");
+            musicList.Items.Add("情熱大陸ED");
+            musicList.Items.Add("プロフェッショナル");
+            musicList.Items.Add("カンブリア宮殿");
+            musicList.Items.Add("プロジェクトX");
         }
-
-        private float WithRatio_Select; // ボタンの横幅の比率
-        private float HeightRatio_Select; // ボタンの縦幅の比率
-        private float XRation_Select; // ボタンのx座標位置の比率
-        private float YRation_Select; // ボタンのy座標位置の比率
-
-        private float WithRatio_PlaySpeed; // ボタンの横幅の比率
-        private float HeightRatio_PlaySpeed; // ボタンの縦幅の比率
-        private float XRation_PlaySpeed; // ボタンのx座標位置の比率
-        private float YRation_PlaySpeed; // ボタンのy座標位置の比率
-
-        private float WithRatio_PlaySpeedValue; // ボタンの横幅の比率
-        private float HeightRatio_PlaySpeedValue; // ボタンの縦幅の比率
-        private float XRation_PlaySpeedValue; // ボタンのx座標位置の比率
-        private float YRation_PlaySpeedValue; // ボタンのy座標位置の比率
-
-        private float WithRatio_trackBar1; // ボタンの横幅の比率
-        private float HeightRatio_trackBar1; // ボタンの縦幅の比率
-        private float XRation_trackBar1; // ボタンのx座標位置の比率
-        private float YRation_trackBar1; // ボタンのy座標位置の比率
-
-        private float WithRatio_TopView; // ボタンの横幅の比率
-        private float HeightRatio_TopView; // ボタンの縦幅の比率
-        private float XRation_TopView; // ボタンのx座標位置の比率
-        private float YRation_TopView; // ボタンのy座標位置の比率
-
-        private float WithRatio_OrgView; // ボタンの横幅の比率
-        private float HeightRatio_OrgView; // ボタンの縦幅の比率
-        private float XRation_OrgView; // ボタンのx座標位置の比率
-        private float YRation_OrgView; // ボタンのy座標位置の比率
-
-        private float WithRatio_ParView; // ボタンの横幅の比率
-        private float HeightRatio_ParView; // ボタンの縦幅の比率
-        private float XRation_ParView; // ボタンのx座標位置の比率
-        private float YRation_ParView; // ボタンのy座標位置の比率
-
-        private float WithRatio_Play; // ボタンの横幅の比率
-        private float HeightRatio_Play; // ボタンの縦幅の比率
-        private float XRation_Play; // ボタンのx座標位置の比率
-        private float YRation_Play; // ボタンのy座標位置の比率
-
-        private float WithRatio_Stop; // ボタンの横幅の比率
-        private float HeightRatio_Stop; // ボタンの縦幅の比率
-        private float XRation_Stop; // ボタンのx座標位置の比率
-        private float YRation_Stop; // ボタンのy座標位置の比率
-
-        private float WithRatio_CurrentPosition; // ボタンの横幅の比率
-        private float HeightRatio_CurrentPosition; // ボタンの縦幅の比率
-        private float XRation_CurrentPosition; // ボタンのx座標位置の比率
-        private float YRation_CurrentPosition; // ボタンのy座標位置の比率
-
-        private float WithRatio_Thumbnail1; // ボタンの横幅の比率
-        private float HeightRatio_Thumbnail1; // ボタンの縦幅の比率
-        private float XRation_Thumbnail1; // ボタンのx座標位置の比率
-        private float YRation_Thumbnail1; // ボタンのy座標位置の比率
-
-        private float WithRatio_Thumbnail2; // ボタンの横幅の比率
-        private float HeightRatio_Thumbnail2; // ボタンの縦幅の比率
-        private float XRation_Thumbnail2; // ボタンのx座標位置の比率
-        private float YRation_Thumbnail2; // ボタンのy座標位置の比率
-
-        private float WithRatio_Thumbnail3; // ボタンの横幅の比率
-        private float HeightRatio_Thumbnail3; // ボタンの縦幅の比率
-        private float XRation_Thumbnail3; // ボタンのx座標位置の比率
-        private float YRation_Thumbnail3; // ボタンのy座標位置の比率
-
-        private float WithRatio_fade; // ボタンの横幅の比率
-        private float HeightRatio_fade; // ボタンの縦幅の比率
-        private float XRation_fade; // ボタンのx座標位置の比率
-        private float YRation_fade; // ボタンのy座標位置の比率
-
-        private float WithRatio_Create; // ボタンの横幅の比率
-        private float HeightRatio_Create; // ボタンの縦幅の比率
-        private float XRation_Create; // ボタンのx座標位置の比率
-        private float YRation_Create; // ボタンのy座標位置の比率
-
-        private float WithRatio_top0; // ボタンの横幅の比率
-        private float HeightRatio_top0; // ボタンの縦幅の比率
-        private float XRation_top0; // ボタンのx座標位置の比率
-        private float YRation_top0; // ボタンのy座標位置の比率
-        private float WithRatio_top1; // ボタンの横幅の比率
-        private float HeightRatio_top1; // ボタンの縦幅の比率
-        private float XRation_top1; // ボタンのx座標位置の比率
-        private float YRation_top1; // ボタンのy座標位置の比率
-        private float WithRatio_top2; // ボタンの横幅の比率
-        private float HeightRatio_top2; // ボタンの縦幅の比率
-        private float XRation_top2; // ボタンのx座標位置の比率
-        private float YRation_top2; // ボタンのy座標位置の比率
-        private float WithRatio_top3; // ボタンの横幅の比率
-        private float HeightRatio_top3; // ボタンの縦幅の比率
-        private float XRation_top3; // ボタンのx座標位置の比率
-        private float YRation_top3; // ボタンのy座標位置の比率
-        private float WithRatio_top4; // ボタンの横幅の比率
-        private float HeightRatio_top4; // ボタンの縦幅の比率
-        private float XRation_top4; // ボタンのx座標位置の比率
-        private float YRation_top4; // ボタンのy座標位置の比率
-        private float WithRatio_top5; // ボタンの横幅の比率
-        private float HeightRatio_top5; // ボタンの縦幅の比率
-        private float XRation_top5; // ボタンのx座標位置の比率
-        private float YRation_top5; // ボタンのy座標位置の比率
-        private float WithRatio_top6; // ボタンの横幅の比率
-        private float HeightRatio_top6; // ボタンの縦幅の比率
-        private float XRation_top6; // ボタンのx座標位置の比率
-        private float YRation_top6; // ボタンのy座標位置の比率
-        private float WithRatio_top7; // ボタンの横幅の比率
-        private float HeightRatio_top7; // ボタンの縦幅の比率
-        private float XRation_top7; // ボタンのx座標位置の比率
-        private float YRation_top7; // ボタンのy座標位置の比率
-        private float WithRatio_top8; // ボタンの横幅の比率
-        private float HeightRatio_top8; // ボタンの縦幅の比率
-        private float XRation_top8; // ボタンのx座標位置の比率
-        private float YRation_top8; // ボタンのy座標位置の比率
-        private float WithRatio_top9; // ボタンの横幅の比率
-        private float HeightRatio_top9; // ボタンの縦幅の比率
-        private float XRation_top9; // ボタンのx座標位置の比率
-        private float YRation_top9; // ボタンのy座標位置の比率
-
-        private float WithRatio_org0; // ボタンの横幅の比率
-        private float HeightRatio_org0; // ボタンの縦幅の比率
-        private float XRation_org0; // ボタンのx座標位置の比率
-        private float YRation_org0; // ボタンのy座標位置の比率
-        private float WithRatio_org1; // ボタンの横幅の比率
-        private float HeightRatio_org1; // ボタンの縦幅の比率
-        private float XRation_org1; // ボタンのx座標位置の比率
-        private float YRation_org1; // ボタンのy座標位置の比率
-        private float WithRatio_org2; // ボタンの横幅の比率
-        private float HeightRatio_org2; // ボタンの縦幅の比率
-        private float XRation_org2; // ボタンのx座標位置の比率
-        private float YRation_org2; // ボタンのy座標位置の比率
-        private float WithRatio_org3; // ボタンの横幅の比率
-        private float HeightRatio_org3; // ボタンの縦幅の比率
-        private float XRation_org3; // ボタンのx座標位置の比率
-        private float YRation_org3; // ボタンのy座標位置の比率
-        private float WithRatio_org4; // ボタンの横幅の比率
-        private float HeightRatio_org4; // ボタンの縦幅の比率
-        private float XRation_org4; // ボタンのx座標位置の比率
-        private float YRation_org4; // ボタンのy座標位置の比率
-        private float WithRatio_org5; // ボタンの横幅の比率
-        private float HeightRatio_org5; // ボタンの縦幅の比率
-        private float XRation_org5; // ボタンのx座標位置の比率
-        private float YRation_org5; // ボタンのy座標位置の比率
-        private float WithRatio_org6; // ボタンの横幅の比率
-        private float HeightRatio_org6; // ボタンの縦幅の比率
-        private float XRation_org6; // ボタンのx座標位置の比率
-        private float YRation_org6; // ボタンのy座標位置の比率
-        private float WithRatio_org7; // ボタンの横幅の比率
-        private float HeightRatio_org7; // ボタンの縦幅の比率
-        private float XRation_org7; // ボタンのx座標位置の比率
-        private float YRation_org7; // ボタンのy座標位置の比率
-        private float WithRatio_org8; // ボタンの横幅の比率
-        private float HeightRatio_org8; // ボタンの縦幅の比率
-        private float XRation_org8; // ボタンのx座標位置の比率
-        private float YRation_org8; // ボタンのy座標位置の比率
-        private float WithRatio_org9; // ボタンの横幅の比率
-        private float HeightRatio_org9; // ボタンの縦幅の比率
-        private float XRation_org9; // ボタンのx座標位置の比率
-        private float YRation_org9; // ボタンのy座標位置の比率
-
-        private float WithRatio_par0; // ボタンの横幅の比率
-        private float HeightRatio_par0; // ボタンの縦幅の比率
-        private float XRation_par0; // ボタンのx座標位置の比率
-        private float YRation_par0; // ボタンのy座標位置の比率
-        private float WithRatio_par1; // ボタンの横幅の比率
-        private float HeightRatio_par1; // ボタンの縦幅の比率
-        private float XRation_par1; // ボタンのx座標位置の比率
-        private float YRation_par1; // ボタンのy座標位置の比率
-        private float WithRatio_par2; // ボタンの横幅の比率
-        private float HeightRatio_par2; // ボタンの縦幅の比率
-        private float XRation_par2; // ボタンのx座標位置の比率
-        private float YRation_par2; // ボタンのy座標位置の比率
-        private float WithRatio_par3; // ボタンの横幅の比率
-        private float HeightRatio_par3; // ボタンの縦幅の比率
-        private float XRation_par3; // ボタンのx座標位置の比率
-        private float YRation_par3; // ボタンのy座標位置の比率
-        private float WithRatio_par4; // ボタンの横幅の比率
-        private float HeightRatio_par4; // ボタンの縦幅の比率
-        private float XRation_par4; // ボタンのx座標位置の比率
-        private float YRation_par4; // ボタンのy座標位置の比率
-        private float WithRatio_par5; // ボタンの横幅の比率
-        private float HeightRatio_par5; // ボタンの縦幅の比率
-        private float XRation_par5; // ボタンのx座標位置の比率
-        private float YRation_par5; // ボタンのy座標位置の比率
-        private float WithRatio_par6; // ボタンの横幅の比率
-        private float HeightRatio_par6; // ボタンの縦幅の比率
-        private float XRation_par6; // ボタンのx座標位置の比率
-        private float YRation_par6; // ボタンのy座標位置の比率
-        private float WithRatio_par7; // ボタンの横幅の比率
-        private float HeightRatio_par7; // ボタンの縦幅の比率
-        private float XRation_par7; // ボタンのx座標位置の比率
-        private float YRation_par7; // ボタンのy座標位置の比率
-        private float WithRatio_par8; // ボタンの横幅の比率
-        private float HeightRatio_par8; // ボタンの縦幅の比率
-        private float XRation_par8; // ボタンのx座標位置の比率
-        private float YRation_par8; // ボタンのy座標位置の比率
-        private float WithRatio_par9; // ボタンの横幅の比率
-        private float HeightRatio_par9; // ボタンの縦幅の比率
-        private float XRation_par9; // ボタンのx座標位置の比率
-        private float YRation_par9; // ボタンのy座標位置の比率
-
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -241,6 +49,8 @@ namespace WorkShop
             Select.SizeMode = PictureBoxSizeMode.StretchImage;
             Create.SizeMode = PictureBoxSizeMode.StretchImage;
             fade.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            Listen.SizeMode = PictureBoxSizeMode.StretchImage;
 
             Play.ImageLocation = @"C:\play_off.png";
             Stop.ImageLocation = @"C:\stop.png";
@@ -249,398 +59,12 @@ namespace WorkShop
             Select.ImageLocation = @"C:\select.png";
             Create.ImageLocation = @"C:\create.png";
             fade.ImageLocation = @"C:\fade.png";
-
-            WithRatio_Select = (float)Select.Width / (float)ClientSize.Width;
-            HeightRatio_Select = (float)Select.Height / (float)ClientSize.Height;
-            XRation_Select = (float)Select.Location.X / (float)ClientSize.Width;
-            YRation_Select = (float)Select.Location.Y / (float)ClientSize.Height;
-
-            WithRatio_PlaySpeed = (float)PlaySpeed.Width / (float)ClientSize.Width;
-            HeightRatio_PlaySpeed = (float)PlaySpeed.Height / (float)ClientSize.Height;
-            XRation_PlaySpeed = (float)PlaySpeed.Location.X / (float)ClientSize.Width;
-            YRation_PlaySpeed = (float)PlaySpeed.Location.Y / (float)ClientSize.Height;
-
-            WithRatio_PlaySpeedValue = (float)PlaySpeedValue.Width / (float)ClientSize.Width;
-            HeightRatio_PlaySpeedValue = (float)PlaySpeedValue.Height / (float)ClientSize.Height;
-            XRation_PlaySpeedValue = (float)PlaySpeedValue.Location.X / (float)ClientSize.Width;
-            YRation_PlaySpeedValue = (float)PlaySpeedValue.Location.Y / (float)ClientSize.Height;
-
-            WithRatio_trackBar1 = (float)trackBar1.Width / (float)ClientSize.Width;
-            HeightRatio_trackBar1 = (float)trackBar1.Height / (float)ClientSize.Height;
-            XRation_trackBar1 = (float)trackBar1.Location.X / (float)ClientSize.Width;
-            YRation_trackBar1 = (float)trackBar1.Location.Y / (float)ClientSize.Height;
-
-            WithRatio_TopView = (float)TopView.Width / (float)ClientSize.Width;
-            HeightRatio_TopView = (float)TopView.Height / (float)ClientSize.Height;
-            XRation_TopView = (float)TopView.Location.X / (float)ClientSize.Width;
-            YRation_TopView = (float)TopView.Location.Y / (float)ClientSize.Height;
-
-            WithRatio_OrgView = (float)OrgView.Width / (float)ClientSize.Width;
-            HeightRatio_OrgView = (float)OrgView.Height / (float)ClientSize.Height;
-            XRation_OrgView = (float)OrgView.Location.X / (float)ClientSize.Width;
-            YRation_OrgView = (float)OrgView.Location.Y / (float)ClientSize.Height;
-
-            WithRatio_ParView = (float)ParView.Width / (float)ClientSize.Width;
-            HeightRatio_ParView = (float)ParView.Height / (float)ClientSize.Height;
-            XRation_ParView = (float)ParView.Location.X / (float)ClientSize.Width;
-            YRation_ParView = (float)ParView.Location.Y / (float)ClientSize.Height;
-
-            WithRatio_Play = (float)Play.Width / (float)ClientSize.Width;
-            HeightRatio_Play = (float)Play.Height / (float)ClientSize.Height;
-            XRation_Play = (float)Play.Location.X / (float)ClientSize.Width;
-            YRation_Play = (float)Play.Location.Y / (float)ClientSize.Height;
-
-            WithRatio_Stop = (float)Stop.Width / (float)ClientSize.Width;
-            HeightRatio_Stop = (float)Stop.Height / (float)ClientSize.Height;
-            XRation_Stop = (float)Stop.Location.X / (float)ClientSize.Width;
-            YRation_Stop = (float)Stop.Location.Y / (float)ClientSize.Height;
-
-            WithRatio_CurrentPosition = (float)CurrentPosition.Width / (float)ClientSize.Width;
-            HeightRatio_CurrentPosition = (float)CurrentPosition.Height / (float)ClientSize.Height;
-            XRation_CurrentPosition = (float)CurrentPosition.Location.X / (float)ClientSize.Width;
-            YRation_CurrentPosition = (float)CurrentPosition.Location.Y / (float)ClientSize.Height;
-
-            WithRatio_Thumbnail1 = (float)Thumbnail1.Width / (float)ClientSize.Width;
-            HeightRatio_Thumbnail1 = (float)Thumbnail1.Height / (float)ClientSize.Height;
-            XRation_Thumbnail1 = (float)Thumbnail1.Location.X / (float)ClientSize.Width;
-            YRation_Thumbnail1 = (float)Thumbnail1.Location.Y / (float)ClientSize.Height;
-
-            WithRatio_Thumbnail2 = (float)Thumbnail2.Width / (float)ClientSize.Width;
-            HeightRatio_Thumbnail2 = (float)Thumbnail2.Height / (float)ClientSize.Height;
-            XRation_Thumbnail2 = (float)Thumbnail2.Location.X / (float)ClientSize.Width;
-            YRation_Thumbnail2 = (float)Thumbnail2.Location.Y / (float)ClientSize.Height;
-
-            WithRatio_Thumbnail3 = (float)Thumbnail3.Width / (float)ClientSize.Width;
-            HeightRatio_Thumbnail3 = (float)Thumbnail3.Height / (float)ClientSize.Height;
-            XRation_Thumbnail3 = (float)Thumbnail3.Location.X / (float)ClientSize.Width;
-            YRation_Thumbnail3 = (float)Thumbnail3.Location.Y / (float)ClientSize.Height;
-
-            WithRatio_fade = (float)fade.Width / (float)ClientSize.Width;
-            HeightRatio_fade = (float)fade.Height / (float)ClientSize.Height;
-            XRation_fade = (float)fade.Location.X / (float)ClientSize.Width;
-            YRation_fade = (float)fade.Location.Y / (float)ClientSize.Height;
-
-            WithRatio_Create = (float)Create.Width / (float)ClientSize.Width;
-            HeightRatio_Create = (float)Create.Height / (float)ClientSize.Height;
-            XRation_Create = (float)Create.Location.X / (float)ClientSize.Width;
-            YRation_Create = (float)Create.Location.Y / (float)ClientSize.Height;
-
-            WithRatio_top0 = (float)top0.Width / (float)ClientSize.Width;
-            HeightRatio_top0 = (float)top0.Height / (float)ClientSize.Height;
-                       
-            XRation_top0 = (float)top0.Location.X / (float)ClientSize.Width;
-            YRation_top0 = (float)top0.Location.Y / (float)ClientSize.Height;
-            XRation_top1 = (float)top1.Location.X / (float)ClientSize.Width;
-            YRation_top1 = (float)top1.Location.Y / (float)ClientSize.Height;
-            XRation_top2 = (float)top2.Location.X / (float)ClientSize.Width;
-            YRation_top2 = (float)top2.Location.Y / (float)ClientSize.Height;
-            XRation_top3 = (float)top3.Location.X / (float)ClientSize.Width;
-            YRation_top3 = (float)top3.Location.Y / (float)ClientSize.Height;
-            XRation_top4 = (float)top4.Location.X / (float)ClientSize.Width;
-            YRation_top4 = (float)top4.Location.Y / (float)ClientSize.Height;
-            XRation_top5 = (float)top5.Location.X / (float)ClientSize.Width;
-            YRation_top5 = (float)top5.Location.Y / (float)ClientSize.Height;
-            XRation_top6 = (float)top6.Location.X / (float)ClientSize.Width;
-            YRation_top6 = (float)top6.Location.Y / (float)ClientSize.Height;
-            XRation_top7 = (float)top7.Location.X / (float)ClientSize.Width;
-            YRation_top7 = (float)top7.Location.Y / (float)ClientSize.Height;
-            XRation_top8 = (float)top8.Location.X / (float)ClientSize.Width;
-            YRation_top8 = (float)top8.Location.Y / (float)ClientSize.Height;
-            XRation_top9 = (float)top9.Location.X / (float)ClientSize.Width;
-            YRation_top9 = (float)top9.Location.Y / (float)ClientSize.Height;
-            
-
-            XRation_org0 = (float)org0.Location.X / (float)ClientSize.Width;
-            YRation_org0 = (float)org0.Location.Y / (float)ClientSize.Height;
-            XRation_org1 = (float)org1.Location.X / (float)ClientSize.Width;
-            YRation_org1 = (float)org1.Location.Y / (float)ClientSize.Height;
-            XRation_org2 = (float)org2.Location.X / (float)ClientSize.Width;
-            YRation_org2 = (float)org2.Location.Y / (float)ClientSize.Height;
-            XRation_org3 = (float)org3.Location.X / (float)ClientSize.Width;
-            YRation_org3 = (float)org3.Location.Y / (float)ClientSize.Height;
-            XRation_org4 = (float)org4.Location.X / (float)ClientSize.Width;
-            YRation_org4 = (float)org4.Location.Y / (float)ClientSize.Height;
-            XRation_org5 = (float)org5.Location.X / (float)ClientSize.Width;
-            YRation_org5 = (float)org5.Location.Y / (float)ClientSize.Height;
-            XRation_org6 = (float)org6.Location.X / (float)ClientSize.Width;
-            YRation_org6 = (float)org6.Location.Y / (float)ClientSize.Height;
-            XRation_org7 = (float)org7.Location.X / (float)ClientSize.Width;
-            YRation_org7 = (float)org7.Location.Y / (float)ClientSize.Height;
-            XRation_org8 = (float)org8.Location.X / (float)ClientSize.Width;
-            YRation_org8 = (float)org8.Location.Y / (float)ClientSize.Height;
-            XRation_org9 = (float)org9.Location.X / (float)ClientSize.Width;
-            YRation_org9 = (float)org9.Location.Y / (float)ClientSize.Height;
-            
-            XRation_par0 = (float)par0.Location.X / (float)ClientSize.Width;
-            YRation_par0 = (float)par0.Location.Y / (float)ClientSize.Height;
-            XRation_par1 = (float)par1.Location.X / (float)ClientSize.Width;
-            YRation_par1 = (float)par1.Location.Y / (float)ClientSize.Height;
-            XRation_par2 = (float)par2.Location.X / (float)ClientSize.Width;
-            YRation_par2 = (float)par2.Location.Y / (float)ClientSize.Height;
-            XRation_par3 = (float)par3.Location.X / (float)ClientSize.Width;
-            YRation_par3 = (float)par3.Location.Y / (float)ClientSize.Height;
-            XRation_par4 = (float)par4.Location.X / (float)ClientSize.Width;
-            YRation_par4 = (float)par4.Location.Y / (float)ClientSize.Height;
-            XRation_par5 = (float)par5.Location.X / (float)ClientSize.Width;
-            YRation_par5 = (float)par5.Location.Y / (float)ClientSize.Height;
-            XRation_par6 = (float)par6.Location.X / (float)ClientSize.Width;
-            YRation_par6 = (float)par6.Location.Y / (float)ClientSize.Height;
-            XRation_par7 = (float)par7.Location.X / (float)ClientSize.Width;
-            YRation_par7 = (float)par7.Location.Y / (float)ClientSize.Height;
-            XRation_par8 = (float)par8.Location.X / (float)ClientSize.Width;
-            YRation_par8 = (float)par8.Location.Y / (float)ClientSize.Height;
-            XRation_par9 = (float)par9.Location.X / (float)ClientSize.Width;
-            YRation_par9 = (float)par9.Location.Y / (float)ClientSize.Height;
-            
+            pictureBox1.ImageLocation = @"C:\music.png";
+            Listen.ImageLocation = @"C:\Listen.jpg";
         }
 
         private void Form1_Resize(object sender, EventArgs e)
         {
-            Point ControllerPosition = new Point();
-
-            Select.Width = (int)(WithRatio_Select * (float)ClientSize.Width);
-            Select.Height = (int)(HeightRatio_Select * (float)ClientSize.Height);
-            ControllerPosition.X = (int)(XRation_Select * (float)ClientSize.Width);
-            ControllerPosition.Y = (int)(YRation_Select * (float)ClientSize.Height);
-            Select.Location = ControllerPosition;
-
-            PlaySpeed.Width = (int)(WithRatio_PlaySpeed * (float)ClientSize.Width);
-            PlaySpeed.Height = (int)(HeightRatio_PlaySpeed * (float)ClientSize.Height);
-            ControllerPosition.X = (int)(XRation_PlaySpeed * (float)ClientSize.Width);
-            ControllerPosition.Y = (int)(YRation_PlaySpeed * (float)ClientSize.Height);
-            PlaySpeed.Location = ControllerPosition;
-
-            PlaySpeedValue.Width = (int)(WithRatio_PlaySpeedValue * (float)ClientSize.Width);
-            PlaySpeedValue.Height = (int)(HeightRatio_PlaySpeedValue * (float)ClientSize.Height);
-            ControllerPosition.X = (int)(XRation_PlaySpeedValue * (float)ClientSize.Width);
-            ControllerPosition.Y = (int)(YRation_PlaySpeedValue * (float)ClientSize.Height);
-            PlaySpeedValue.Location = ControllerPosition;
-
-            trackBar1.Width = (int)(WithRatio_trackBar1 * (float)ClientSize.Width);
-            trackBar1.Height = (int)(HeightRatio_trackBar1 * (float)ClientSize.Height);
-            ControllerPosition.X = (int)(XRation_trackBar1 * (float)ClientSize.Width);
-            ControllerPosition.Y = (int)(YRation_trackBar1 * (float)ClientSize.Height);
-            trackBar1.Location = ControllerPosition;
-
-            TopView.Width = (int)(WithRatio_TopView * (float)ClientSize.Width);
-            TopView.Height = (int)(HeightRatio_TopView * (float)ClientSize.Height);
-            ControllerPosition.X = (int)(XRation_TopView * (float)ClientSize.Width);
-            ControllerPosition.Y = (int)(YRation_TopView * (float)ClientSize.Height);
-            TopView.Location = ControllerPosition;
-
-            OrgView.Width = (int)(WithRatio_OrgView * (float)ClientSize.Width);
-            OrgView.Height = (int)(HeightRatio_OrgView * (float)ClientSize.Height);
-            ControllerPosition.X = (int)(XRation_OrgView * (float)ClientSize.Width);
-            ControllerPosition.Y = (int)(YRation_OrgView * (float)ClientSize.Height);
-            OrgView.Location = ControllerPosition;
-
-            ParView.Width = (int)(WithRatio_ParView * (float)ClientSize.Width);
-            ParView.Height = (int)(HeightRatio_ParView * (float)ClientSize.Height);
-            ControllerPosition.X = (int)(XRation_ParView * (float)ClientSize.Width);
-            ControllerPosition.Y = (int)(YRation_ParView * (float)ClientSize.Height);
-            ParView.Location = ControllerPosition;
-
-            Play.Width = (int)(WithRatio_Play * (float)ClientSize.Width);
-            Play.Height = (int)(HeightRatio_Play * (float)ClientSize.Height);
-            ControllerPosition.X = (int)(XRation_Play * (float)ClientSize.Width);
-            ControllerPosition.Y = (int)(YRation_Play * (float)ClientSize.Height);
-            Play.Location = ControllerPosition;
-
-            Stop.Width = (int)(WithRatio_Stop * (float)ClientSize.Width);
-            Stop.Height = (int)(HeightRatio_Stop * (float)ClientSize.Height);
-            ControllerPosition.X = (int)(XRation_Stop * (float)ClientSize.Width);
-            ControllerPosition.Y = (int)(YRation_Stop * (float)ClientSize.Height);
-            Stop.Location = ControllerPosition;
-
-            CurrentPosition.Width = (int)(WithRatio_CurrentPosition * (float)ClientSize.Width);
-            CurrentPosition.Height = (int)(HeightRatio_CurrentPosition * (float)ClientSize.Height);
-            ControllerPosition.X = (int)(XRation_CurrentPosition * (float)ClientSize.Width);
-            ControllerPosition.Y = (int)(YRation_CurrentPosition * (float)ClientSize.Height);
-            CurrentPosition.Location = ControllerPosition;
-
-            Thumbnail1.Width = (int)(WithRatio_Thumbnail1 * (float)ClientSize.Width);
-            Thumbnail1.Height = (int)(HeightRatio_Thumbnail1 * (float)ClientSize.Height);
-            ControllerPosition.X = (int)(XRation_Thumbnail1 * (float)ClientSize.Width);
-            ControllerPosition.Y = (int)(YRation_Thumbnail1 * (float)ClientSize.Height);
-            Thumbnail1.Location = ControllerPosition;
-
-            Thumbnail2.Width = (int)(WithRatio_Thumbnail2 * (float)ClientSize.Width);
-            Thumbnail2.Height = (int)(HeightRatio_Thumbnail2 * (float)ClientSize.Height);
-            ControllerPosition.X = (int)(XRation_Thumbnail2 * (float)ClientSize.Width);
-            ControllerPosition.Y = (int)(YRation_Thumbnail2 * (float)ClientSize.Height);
-            Thumbnail2.Location = ControllerPosition;
-
-            Thumbnail3.Width = (int)(WithRatio_Thumbnail3 * (float)ClientSize.Width);
-            Thumbnail3.Height = (int)(HeightRatio_Thumbnail3 * (float)ClientSize.Height);
-            ControllerPosition.X = (int)(XRation_Thumbnail3 * (float)ClientSize.Width);
-            ControllerPosition.Y = (int)(YRation_Thumbnail3 * (float)ClientSize.Height);
-            Thumbnail3.Location = ControllerPosition;
-
-            fade.Width = (int)(WithRatio_fade * (float)ClientSize.Width);
-            fade.Height = (int)(HeightRatio_fade * (float)ClientSize.Height);
-            ControllerPosition.X = (int)(XRation_fade * (float)ClientSize.Width);
-            ControllerPosition.Y = (int)(YRation_fade * (float)ClientSize.Height);
-            fade.Location = ControllerPosition;
-
-            Create.Width = (int)(WithRatio_Create * (float)ClientSize.Width);
-            Create.Height = (int)(HeightRatio_Create * (float)ClientSize.Height);
-            ControllerPosition.X = (int)(XRation_Create * (float)ClientSize.Width);
-            ControllerPosition.Y = (int)(YRation_Create * (float)ClientSize.Height);
-            Create.Location = ControllerPosition;
-
-            top0.Width = (int)(WithRatio_top0 * (float)ClientSize.Width);
-            top0.Height = (int)(HeightRatio_top0 * (float)ClientSize.Height);
-            ControllerPosition.X = (int)(XRation_top0 * (float)ClientSize.Width);
-            ControllerPosition.Y = (int)(YRation_top0 * (float)ClientSize.Height);
-            top0.Location = ControllerPosition;
-            
-            top1.Width = (int)(WithRatio_top0 * (float)ClientSize.Width);
-            top1.Height = (int)(HeightRatio_top0 * (float)ClientSize.Height);
-            ControllerPosition.X = (int)(XRation_top1 * (float)ClientSize.Width);
-            ControllerPosition.Y = (int)(YRation_top1 * (float)ClientSize.Height);
-            top1.Location = ControllerPosition;
-            top2.Width = (int)(WithRatio_top0 * (float)ClientSize.Width);
-            top2.Height = (int)(HeightRatio_top0 * (float)ClientSize.Height);
-            ControllerPosition.X = (int)(XRation_top2 * (float)ClientSize.Width);
-            ControllerPosition.Y = (int)(YRation_top2 * (float)ClientSize.Height);
-            top2.Location = ControllerPosition;
-            top3.Width = (int)(WithRatio_top0 * (float)ClientSize.Width);
-            top3.Height = (int)(HeightRatio_top0 * (float)ClientSize.Height);
-            ControllerPosition.X = (int)(XRation_top3 * (float)ClientSize.Width);
-            ControllerPosition.Y = (int)(YRation_top3 * (float)ClientSize.Height);
-            top3.Location = ControllerPosition;
-            top4.Width = (int)(WithRatio_top0 * (float)ClientSize.Width);
-            top4.Height = (int)(HeightRatio_top0 * (float)ClientSize.Height);
-            ControllerPosition.X = (int)(XRation_top4 * (float)ClientSize.Width);
-            ControllerPosition.Y = (int)(YRation_top4 * (float)ClientSize.Height);
-            top4.Location = ControllerPosition;
-            top5.Width = (int)(WithRatio_top0 * (float)ClientSize.Width);
-            top5.Height = (int)(HeightRatio_top0 * (float)ClientSize.Height);
-            ControllerPosition.X = (int)(XRation_top5 * (float)ClientSize.Width);
-            ControllerPosition.Y = (int)(YRation_top5 * (float)ClientSize.Height);
-            top5.Location = ControllerPosition;
-            top6.Width = (int)(WithRatio_top0 * (float)ClientSize.Width);
-            top6.Height = (int)(HeightRatio_top0 * (float)ClientSize.Height);
-            ControllerPosition.X = (int)(XRation_top6 * (float)ClientSize.Width);
-            ControllerPosition.Y = (int)(YRation_top6 * (float)ClientSize.Height);
-            top6.Location = ControllerPosition;
-            top7.Width = (int)(WithRatio_top0 * (float)ClientSize.Width);
-            top7.Height = (int)(HeightRatio_top0 * (float)ClientSize.Height);
-            ControllerPosition.X = (int)(XRation_top7 * (float)ClientSize.Width);
-            ControllerPosition.Y = (int)(YRation_top7 * (float)ClientSize.Height);
-            top7.Location = ControllerPosition;
-            top8.Width = (int)(WithRatio_top0 * (float)ClientSize.Width);
-            top8.Height = (int)(HeightRatio_top0 * (float)ClientSize.Height);
-            ControllerPosition.X = (int)(XRation_top8 * (float)ClientSize.Width);
-            ControllerPosition.Y = (int)(YRation_top8 * (float)ClientSize.Height);
-            top8.Location = ControllerPosition;
-            top9.Width = (int)(WithRatio_top0 * (float)ClientSize.Width);
-            top9.Height = (int)(HeightRatio_top0 * (float)ClientSize.Height);
-            ControllerPosition.X = (int)(XRation_top9 * (float)ClientSize.Width);
-            ControllerPosition.Y = (int)(YRation_top9 * (float)ClientSize.Height);
-            top9.Location = ControllerPosition;
-
-            org0.Width = (int)(WithRatio_top0 * (float)ClientSize.Width);
-            org0.Height = (int)(HeightRatio_top0 * (float)ClientSize.Height);
-            ControllerPosition.X = (int)(XRation_org0 * (float)ClientSize.Width);
-            ControllerPosition.Y = (int)(YRation_org0 * (float)ClientSize.Height);
-            org0.Location = ControllerPosition;
-            org1.Width = (int)(WithRatio_top0 * (float)ClientSize.Width);
-            org1.Height = (int)(HeightRatio_top0 * (float)ClientSize.Height);
-            ControllerPosition.X = (int)(XRation_org1 * (float)ClientSize.Width);
-            ControllerPosition.Y = (int)(YRation_org1 * (float)ClientSize.Height);
-            org1.Location = ControllerPosition;
-            org2.Width = (int)(WithRatio_top0 * (float)ClientSize.Width);
-            org2.Height = (int)(HeightRatio_top0 * (float)ClientSize.Height);
-            ControllerPosition.X = (int)(XRation_org2 * (float)ClientSize.Width);
-            ControllerPosition.Y = (int)(YRation_org2 * (float)ClientSize.Height);
-            org2.Location = ControllerPosition;
-            org3.Width = (int)(WithRatio_top0 * (float)ClientSize.Width);
-            org3.Height = (int)(HeightRatio_top0 * (float)ClientSize.Height);
-            ControllerPosition.X = (int)(XRation_org3 * (float)ClientSize.Width);
-            ControllerPosition.Y = (int)(YRation_org3 * (float)ClientSize.Height);
-            org3.Location = ControllerPosition;
-            org4.Width = (int)(WithRatio_top0 * (float)ClientSize.Width);
-            org4.Height = (int)(HeightRatio_top0 * (float)ClientSize.Height);
-            ControllerPosition.X = (int)(XRation_org4 * (float)ClientSize.Width);
-            ControllerPosition.Y = (int)(YRation_org4 * (float)ClientSize.Height);
-            org4.Location = ControllerPosition;
-            org5.Width = (int)(WithRatio_top0 * (float)ClientSize.Width);
-            org5.Height = (int)(HeightRatio_top0 * (float)ClientSize.Height);
-            ControllerPosition.X = (int)(XRation_org5 * (float)ClientSize.Width);
-            ControllerPosition.Y = (int)(YRation_org5 * (float)ClientSize.Height);
-            org5.Location = ControllerPosition;
-            org6.Width = (int)(WithRatio_top0 * (float)ClientSize.Width);
-            org6.Height = (int)(HeightRatio_top0 * (float)ClientSize.Height);
-            ControllerPosition.X = (int)(XRation_org6 * (float)ClientSize.Width);
-            ControllerPosition.Y = (int)(YRation_org6 * (float)ClientSize.Height);
-            org6.Location = ControllerPosition;
-            org7.Width = (int)(WithRatio_top0 * (float)ClientSize.Width);
-            org7.Height = (int)(HeightRatio_top0 * (float)ClientSize.Height);
-            ControllerPosition.X = (int)(XRation_org7 * (float)ClientSize.Width);
-            ControllerPosition.Y = (int)(YRation_org7 * (float)ClientSize.Height);
-            org7.Location = ControllerPosition;
-            org8.Width = (int)(WithRatio_top0 * (float)ClientSize.Width);
-            org8.Height = (int)(HeightRatio_top0 * (float)ClientSize.Height);
-            ControllerPosition.X = (int)(XRation_org8 * (float)ClientSize.Width);
-            ControllerPosition.Y = (int)(YRation_org8 * (float)ClientSize.Height);
-            org8.Location = ControllerPosition;
-            org9.Width = (int)(WithRatio_top0 * (float)ClientSize.Width);
-            org9.Height = (int)(HeightRatio_top0 * (float)ClientSize.Height);
-            ControllerPosition.X = (int)(XRation_org9 * (float)ClientSize.Width);
-            ControllerPosition.Y = (int)(YRation_org9 * (float)ClientSize.Height);
-            org9.Location = ControllerPosition;
-
-            par0.Width = (int)(WithRatio_top0 * (float)ClientSize.Width);
-            par0.Height = (int)(HeightRatio_top0 * (float)ClientSize.Height);
-            ControllerPosition.X = (int)(XRation_par0 * (float)ClientSize.Width);
-            ControllerPosition.Y = (int)(YRation_par0 * (float)ClientSize.Height);
-            par0.Location = ControllerPosition;
-            par1.Width = (int)(WithRatio_top0 * (float)ClientSize.Width);
-            par1.Height = (int)(HeightRatio_top0 * (float)ClientSize.Height);
-            ControllerPosition.X = (int)(XRation_par1 * (float)ClientSize.Width);
-            ControllerPosition.Y = (int)(YRation_par1 * (float)ClientSize.Height);
-            par1.Location = ControllerPosition;
-            par2.Width = (int)(WithRatio_top0 * (float)ClientSize.Width);
-            par2.Height = (int)(HeightRatio_top0 * (float)ClientSize.Height);
-            ControllerPosition.X = (int)(XRation_par2 * (float)ClientSize.Width);
-            ControllerPosition.Y = (int)(YRation_par2 * (float)ClientSize.Height);
-            par2.Location = ControllerPosition;
-            par3.Width = (int)(WithRatio_top0 * (float)ClientSize.Width);
-            par3.Height = (int)(HeightRatio_top0 * (float)ClientSize.Height);
-            ControllerPosition.X = (int)(XRation_par3 * (float)ClientSize.Width);
-            ControllerPosition.Y = (int)(YRation_par3 * (float)ClientSize.Height);
-            par3.Location = ControllerPosition;
-            par4.Width = (int)(WithRatio_top0 * (float)ClientSize.Width);
-            par4.Height = (int)(HeightRatio_top0 * (float)ClientSize.Height);
-            ControllerPosition.X = (int)(XRation_par4 * (float)ClientSize.Width);
-            ControllerPosition.Y = (int)(YRation_par4 * (float)ClientSize.Height);
-            par4.Location = ControllerPosition;
-            par5.Width = (int)(WithRatio_top0 * (float)ClientSize.Width);
-            par5.Height = (int)(HeightRatio_top0 * (float)ClientSize.Height);
-            ControllerPosition.X = (int)(XRation_par5 * (float)ClientSize.Width);
-            ControllerPosition.Y = (int)(YRation_par5 * (float)ClientSize.Height);
-            par5.Location = ControllerPosition;
-            par6.Width = (int)(WithRatio_top0 * (float)ClientSize.Width);
-            par6.Height = (int)(HeightRatio_top0 * (float)ClientSize.Height);
-            ControllerPosition.X = (int)(XRation_par6 * (float)ClientSize.Width);
-            ControllerPosition.Y = (int)(YRation_par6 * (float)ClientSize.Height);
-            par6.Location = ControllerPosition;
-            par7.Width = (int)(WithRatio_top0 * (float)ClientSize.Width);
-            par7.Height = (int)(HeightRatio_top0 * (float)ClientSize.Height);
-            ControllerPosition.X = (int)(XRation_par7 * (float)ClientSize.Width);
-            ControllerPosition.Y = (int)(YRation_par7 * (float)ClientSize.Height);
-            par7.Location = ControllerPosition;
-            par8.Width = (int)(WithRatio_top0 * (float)ClientSize.Width);
-            par8.Height = (int)(HeightRatio_top0 * (float)ClientSize.Height);
-            ControllerPosition.X = (int)(XRation_par8 * (float)ClientSize.Width);
-            ControllerPosition.Y = (int)(YRation_par8 * (float)ClientSize.Height);
-            par8.Location = ControllerPosition;
-            par9.Width = (int)(WithRatio_top0 * (float)ClientSize.Width);
-            par9.Height = (int)(HeightRatio_top0 * (float)ClientSize.Height);
-            ControllerPosition.X = (int)(XRation_par9 * (float)ClientSize.Width);
-            ControllerPosition.Y = (int)(YRation_par9 * (float)ClientSize.Height);
-            par9.Location = ControllerPosition;
             
         }
 
@@ -765,7 +189,7 @@ namespace WorkShop
             System.Diagnostics.Process p = new System.Diagnostics.Process();
             p.StartInfo.CreateNoWindow = true;
             
-            for (int i = 1; i < count_all; i++)
+            for (int i = 1; i < count; i++)
             {
 
                 if (i >= 2)
@@ -774,7 +198,8 @@ namespace WorkShop
                 }
             }
             
-            System.Diagnostics.Process.Start("C:\\ffmpeg\\bin\\ffmpeg", @"" + command + "-filter_complex " + "\"concat=n=" + count_all + ":v=1:a=1\" C:\\ffmpeg\\bin\\movie\\output.mp4");
+            System.Diagnostics.Process.Start("C:\\ffmpeg\\bin\\ffmpeg", @"" + command + "-filter_complex " + "\"concat=n=" + count + ":v=1:a=1\" C:\\ffmpeg\\bin\\movie\\output.mp4");
+            
         }
 
         private void TopView_Enter(object sender, EventArgs e)
@@ -802,11 +227,11 @@ namespace WorkShop
             Image thumbnail = createThumbnail(original, TopView.Width, TopView.Height);
 
             imageList1.Images.Add(thumbnail);
-            Thumbnail1.Items.Add("C:\\thum\\thum.png", count_top);
+            Thumbnail1.Items.Add("C:\\thum\\thum.png", count);
 
             original.Dispose();
             thumbnail.Dispose();
-            count_top++;
+            count++;
 
             System.IO.File.Delete(url);
             
@@ -820,11 +245,11 @@ namespace WorkShop
                 
             string START = start.ToString();
             string END = end.ToString();
-            string command = @"-i C:\\ffmpeg\\bin\\top.mp4 -t 4 -ss " + START + " C:\\ffmpeg\\bin\\movie\\input" + count + ".mp4";
+            string command = @"-i C:\\ffmpeg\\bin\\top.mp4 -t 10 -ss " + START + " C:\\ffmpeg\\bin\\movie\\input" + count + ".mp4";
             System.Diagnostics.Process p = new System.Diagnostics.Process();
             p.StartInfo.CreateNoWindow = true;
             System.Diagnostics.Process.Start("C:\\ffmpeg\\bin\\ffmpeg", command);
-            count = count + 1;
+            //count = count + 1;
             this.ActiveControl = this.dummy;
         }
 
@@ -844,19 +269,19 @@ namespace WorkShop
             int height = TopView.Height / 4;
 
 
-            imageList2.ImageSize = new Size(width, height);
-            Thumbnail2.LargeImageList = imageList2;
+            imageList1.ImageSize = new Size(width, height);
+            Thumbnail1.LargeImageList = imageList1;
 
 
             Image original = Bitmap.FromFile("C:\\thum\\thum.png");
             Image thumbnail = createThumbnail(original, OrgView.Width, OrgView.Height);
 
-            imageList2.Images.Add(thumbnail);
-            Thumbnail2.Items.Add("C:\\thum\\thum.png", count_org);
+            imageList1.Images.Add(thumbnail);
+            Thumbnail1.Items.Add("C:\\thum\\thum.png", count);
 
             original.Dispose();
             thumbnail.Dispose();
-            count_org++;
+            count++;
 
             System.IO.File.Delete(url);
             int start = CurrentPosition.Value - 2;
@@ -869,11 +294,11 @@ namespace WorkShop
                 
             string START = start.ToString();
             string END = end.ToString();
-            string command = @"-i C:\\ffmpeg\\bin\\top.mp4 -t 4 -ss " + START + " C:\\ffmpeg\\bin\\movie\\input" + count + ".mp4";
+            string command = @"-i C:\\ffmpeg\\bin\\org.mp4 -t 10 -ss " + START + " C:\\ffmpeg\\bin\\movie\\input" + count  + ".mp4";
             System.Diagnostics.Process p = new System.Diagnostics.Process();
             p.StartInfo.CreateNoWindow = true;
             System.Diagnostics.Process.Start("C:\\ffmpeg\\bin\\ffmpeg", command);
-            count = count + 1;
+            //count = count + 1;
             this.ActiveControl = this.dummy;
         }
 
@@ -893,19 +318,19 @@ namespace WorkShop
             int height = TopView.Height / 4;
 
 
-            imageList3.ImageSize = new Size(width, height);
-            Thumbnail3.LargeImageList = imageList3;
+            imageList1.ImageSize = new Size(width, height);
+            Thumbnail1.LargeImageList = imageList1;
 
 
             Image original = Bitmap.FromFile("C:\\thum\\thum.png");
             Image thumbnail = createThumbnail(original, ParView.Width, ParView.Height);
 
-            imageList3.Images.Add(thumbnail);
-            Thumbnail3.Items.Add("C:\\thum\\thum.png", count_par);
-
+            imageList1.Images.Add(thumbnail);
+            Thumbnail1.Items.Add("C:\\thum\\thum.png", count);
+            //Thumbnail1.ScrollIntoView("C:\\thum\\thum.png", count-1);
             original.Dispose();
             thumbnail.Dispose();
-            count_par++;
+            count++;
 
             System.IO.File.Delete(url);
             int start = CurrentPosition.Value - 2;
@@ -919,11 +344,11 @@ namespace WorkShop
             string START = start.ToString();
             string END = end.ToString();
             
-            string command = @"-i C:\\ffmpeg\\bin\\par.mp4 -t 4 -ss " + START + " C:\\ffmpeg\\bin\\movie\\input" + count + ".mp4";
+            string command = @"-i C:\\ffmpeg\\bin\\par.mp4 -t 10 -ss " + START + " C:\\ffmpeg\\bin\\movie\\input" + count + ".mp4";
             System.Diagnostics.Process p = new System.Diagnostics.Process();
             p.StartInfo.CreateNoWindow = true;
             System.Diagnostics.Process.Start("C:\\ffmpeg\\bin\\ffmpeg", command);
-            count = count + 1;
+            //count = count + 1;
             this.ActiveControl = this.dummy;
         }
 
@@ -1285,6 +710,71 @@ namespace WorkShop
 
         }
 
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("C:\\ffmpeg\\bin\\ffmpeg", @" -i C:\\ffmpeg\\bin\\movie\\output.mp4 -vcodec copy -map 0:0 C:\\ffmpeg\\bin\\destination.mp4");
+            if (musicList.SelectedIndex == 0)
+            {
+                System.Diagnostics.Process.Start("C:\\ffmpeg\\bin\\ffmpeg", @" -i C:\\ffmpeg\\bin\\destination.mp4 -i C:\\ffmpeg\\bin\\情熱大陸s.mp3 -vcodec copy -acodec copy C:\\ffmpeg\\bin\\movie\\Newoutput.mp4");
+            }else if (musicList.SelectedIndex == 1)
+            {
+                System.Diagnostics.Process.Start("C:\\ffmpeg\\bin\\ffmpeg", @" -i C:\\ffmpeg\\bin\\destination.mp4 -i C:\\ffmpeg\\bin\\情熱大陸e.mp3 -vcodec copy -acodec copy C:\\ffmpeg\\bin\\movie\\Newoutput.mp4");
+            }
+            else if (musicList.SelectedIndex == 2)
+            {
+                System.Diagnostics.Process.Start("C:\\ffmpeg\\bin\\ffmpeg", @" -i C:\\ffmpeg\\bin\\destination.mp4 -i C:\\ffmpeg\\bin\\Progress.mp3 -vcodec copy -acodec copy C:\\ffmpeg\\bin\\movie\\Newoutput.mp4");
+            }
+            else if (musicList.SelectedIndex == 3)
+            {
+                System.Diagnostics.Process.Start("C:\\ffmpeg\\bin\\ffmpeg", @" -i C:\\ffmpeg\\bin\\destination.mp4 -i C:\\ffmpeg\\bin\\カンブリア宮殿.mp3 -vcodec copy -acodec copy C:\\ffmpeg\\bin\\movie\\Newoutput.mp4");
+            }
+            else if (musicList.SelectedIndex == 4)
+            {
+                System.Diagnostics.Process.Start("C:\\ffmpeg\\bin\\ffmpeg", @" -i C:\\ffmpeg\\bin\\destination.mp4 -i C:\\ffmpeg\\bin\\地上の星.mp3 -vcodec copy -acodec copy C:\\ffmpeg\\bin\\movie\\Newoutput.mp4");
+            }
+
+
+
+
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Listen_Click(object sender, EventArgs e)
+        {
+            //player.controls.stop();
+            player = new WindowsMediaPlayer();
+            if (musicList.SelectedIndex == 0)
+            {
+                player.settings.setMode("loop", false);
+                player.URL = @"C:\\ffmpeg\\bin\\情熱大陸s.mp3";
+            }
+            else if (musicList.SelectedIndex == 1)
+            {
+                player.settings.setMode("loop", false);
+                player.URL = @"C:\\ffmpeg\\bin\\情熱大陸e.mp3";
+            }
+            else if (musicList.SelectedIndex == 2)
+            {
+                player.settings.setMode("loop", false);
+                player.URL = @"C:\\ffmpeg\\bin\\Progress.mp3";
+            }
+            else if (musicList.SelectedIndex == 3)
+            {
+                player.settings.setMode("loop", false);
+                player.URL = @"C:\\ffmpeg\\bin\\カンブリア宮殿.mp3";
+            }
+            else if (musicList.SelectedIndex == 4)
+            {
+                player.settings.setMode("loop", false);
+                player.URL = @"C:\\ffmpeg\\bin\\地上の星.mp3";
+            }
+        }
+
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
             TopView.settings.rate = trackBar1.Value;
@@ -1329,9 +819,11 @@ namespace WorkShop
             int count_all = count_top + count_org + count_par;
             System.Diagnostics.Process p = new System.Diagnostics.Process();
             p.StartInfo.CreateNoWindow = true;
-            for (int i = 1; i <= count_all; i++){
-                System.Diagnostics.Process.Start("C:\\ffmpeg\\bin\\ffmpeg", @" -i C:\\ffmpeg\\bin\\movie\\input" + i + ".mp4 -vf fade=in:0:15,fade=out:101:15 C:\\ffmpeg\\bin\\movie\\output" + i + ".mp4");
+            for (int i = 1; i <= count; i++){
+                System.Diagnostics.Process.Start("C:\\ffmpeg\\bin\\ffmpeg", @" -i C:\\ffmpeg\\bin\\movie\\input" + i + ".mp4 -vf fade=in:0:15,fade=out:29*10-15:15 C:\\ffmpeg\\bin\\movie\\output" + i + ".mp4");
             }
         }
+
+        
     }
 }

@@ -42,6 +42,14 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="Toolbox.Extensions, Version=0.2.2.20176, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Toolbox.0.2.2\lib\net40\Toolbox.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Toolbox.Logger, Version=0.2.2.20176, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Toolbox.0.2.2\lib\net40\Toolbox.Logger.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Form1.cs">
@@ -64,6 +72,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

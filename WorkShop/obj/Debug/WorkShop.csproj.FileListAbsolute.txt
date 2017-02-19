@@ -11,3 +11,15 @@ c:\users\tsuka\documents\visual studio 2013\Projects\WorkShop\WorkShop\obj\Debug
 C:\Users\Tsuka\Documents\Visual Studio 2013\Projects\WorkShop\WorkShop\obj\Debug\Interop.WMPLib.dll
 C:\Users\Tsuka\Documents\Visual Studio 2013\Projects\WorkShop\WorkShop\obj\Debug\AxInterop.WMPLib.dll
 C:\Users\Tsuka\Documents\Visual Studio 2013\Projects\WorkShop\WorkShop\obj\Debug\WorkShop.csproj.ResolveComReference.cache
+C:\Users\tsuka-vaio2\Desktop\WorkShop-master\Debug\WorkShop.exe.config
+C:\Users\tsuka-vaio2\Desktop\WorkShop-master\WorkShop\obj\Debug\Interop.WMPLib.dll
+C:\Users\tsuka-vaio2\Desktop\WorkShop-master\WorkShop\obj\Debug\AxInterop.WMPLib.dll
+C:\Users\tsuka-vaio2\Desktop\WorkShop-master\WorkShop\obj\Debug\WorkShop.csproj.ResolveComReference.cache
+C:\Users\tsuka-vaio2\Desktop\WorkShop-master\WorkShop\obj\Debug\WorkShop.exe
+C:\Users\tsuka-vaio2\Desktop\WorkShop-master\WorkShop\obj\Debug\WorkShop.pdb
+C:\Users\tsuka-vaio2\Desktop\WorkShop-master\Debug\WorkShop.exe
+C:\Users\tsuka-vaio2\Desktop\WorkShop-master\Debug\WorkShop.pdb
+C:\Users\tsuka-vaio2\Desktop\WorkShop-master\WorkShop\obj\Debug\WorkShop.csprojResolveAssemblyReference.cache
+C:\Users\tsuka-vaio2\Desktop\WorkShop-master\WorkShop\obj\Debug\WorkShop.Form1.resources
+C:\Users\tsuka-vaio2\Desktop\WorkShop-master\WorkShop\obj\Debug\WorkShop.Properties.Resources.resources
+C:\Users\tsuka-vaio2\Desktop\WorkShop-master\WorkShop\obj\Debug\WorkShop.csproj.GenerateResource.Cache
