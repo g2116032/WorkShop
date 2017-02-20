@@ -23,3 +23,15 @@ C:\Users\tsuka-vaio2\Desktop\WorkShop-master\WorkShop\obj\Debug\WorkShop.csprojR
 C:\Users\tsuka-vaio2\Desktop\WorkShop-master\WorkShop\obj\Debug\WorkShop.Form1.resources
 C:\Users\tsuka-vaio2\Desktop\WorkShop-master\WorkShop\obj\Debug\WorkShop.Properties.Resources.resources
 C:\Users\tsuka-vaio2\Desktop\WorkShop-master\WorkShop\obj\Debug\WorkShop.csproj.GenerateResource.Cache
+C:\Users\Tsuka\Desktop\WorkShop-master\Debug\WorkShop.exe.config
+C:\Users\Tsuka\Desktop\WorkShop-master\WorkShop\obj\Debug\Interop.WMPLib.dll
+C:\Users\Tsuka\Desktop\WorkShop-master\WorkShop\obj\Debug\AxInterop.WMPLib.dll
+C:\Users\Tsuka\Desktop\WorkShop-master\WorkShop\obj\Debug\WorkShop.csproj.ResolveComReference.cache
+C:\Users\Tsuka\Desktop\WorkShop-master\WorkShop\obj\Debug\WorkShop.exe
+C:\Users\Tsuka\Desktop\WorkShop-master\WorkShop\obj\Debug\WorkShop.pdb
+C:\Users\Tsuka\Desktop\WorkShop-master\Debug\WorkShop.exe
+C:\Users\Tsuka\Desktop\WorkShop-master\Debug\WorkShop.pdb
+C:\Users\Tsuka\Desktop\WorkShop-master\WorkShop\obj\Debug\WorkShop.csprojResolveAssemblyReference.cache
+C:\Users\Tsuka\Desktop\WorkShop-master\WorkShop\obj\Debug\WorkShop.Form1.resources
+C:\Users\Tsuka\Desktop\WorkShop-master\WorkShop\obj\Debug\WorkShop.Properties.Resources.resources
+C:\Users\Tsuka\Desktop\WorkShop-master\WorkShop\obj\Debug\WorkShop.csproj.GenerateResource.Cache

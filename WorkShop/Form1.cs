@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -14,60 +15,68 @@ namespace WorkShop
     public partial class Form1 : Form
     {
         //関数の宣言
-        int flag1 = 1;
+        int flag1 = 0;
         int flag2 = 1;
         int flag3 = 1;
-        string FolderPath;
+        string FolderPath = @"C:\";
         string movie1, movie2, movie3;
         int count_top = 0;
         int count_org = 0;
         int count_par = 0;
         int count = 0;
         WindowsMediaPlayer player;
+        int inter = 4;
+        int Total = 0;
+        int[] intervalValue = new int[1000];
+
 
         public Form1()
         {
             InitializeComponent();
-            musicList.Items.Add("情熱大陸OP");
-            musicList.Items.Add("情熱大陸ED");
-            musicList.Items.Add("プロフェッショナル");
-            musicList.Items.Add("カンブリア宮殿");
-            musicList.Items.Add("プロジェクトX");
+            musicList.Items.Add("ピアノ1");
+            musicList.Items.Add("ピアノ2");
+            musicList.Items.Add("ピアノ3");
+            musicList.Items.Add("ピアノ4");
+            musicList.Items.Add("ピアノ5");
+            musicList.Items.Add("ギター1");
+            musicList.Items.Add("ギター2");
+            musicList.Items.Add("ギター3");
+            musicList.Items.Add("ギター4");
+            musicList.Items.Add("ギター5");
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.ActiveControl = this.dummy;
             this.Text = "Multiview Video Editor";
             TopView.uiMode = "none";
             OrgView.uiMode = "none";
             ParView.uiMode = "none";
+            TopView.settings.volume = 100;
+            OrgView.settings.volume = 0;
+            ParView.settings.volume = 0;
 
             Play.SizeMode = PictureBoxSizeMode.StretchImage;
             Stop.SizeMode = PictureBoxSizeMode.StretchImage;
-            PlaySpeed.SizeMode = PictureBoxSizeMode.StretchImage;
-            PlaySpeedValue.SizeMode = PictureBoxSizeMode.StretchImage;
             Select.SizeMode = PictureBoxSizeMode.StretchImage;
             Create.SizeMode = PictureBoxSizeMode.StretchImage;
-            fade.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            bgm.SizeMode = PictureBoxSizeMode.StretchImage;
             Listen.SizeMode = PictureBoxSizeMode.StretchImage;
 
             Play.ImageLocation = @"C:\play_off.png";
             Stop.ImageLocation = @"C:\stop.png";
-            PlaySpeed.ImageLocation = @"C:\playspeed.png";
-            PlaySpeedValue.ImageLocation = @"C:\1.png";
+            
             Select.ImageLocation = @"C:\select.png";
             Create.ImageLocation = @"C:\create.png";
-            fade.ImageLocation = @"C:\fade.png";
-            pictureBox1.ImageLocation = @"C:\music.png";
-            Listen.ImageLocation = @"C:\Listen.jpg";
+            bgm.ImageLocation = @"C:\bgm.png";
+            Listen.ImageLocation = @"C:\listen.jpg";
+            TotalTime.Text = Total.ToString();
         }
 
         private void Form1_Resize(object sender, EventArgs e)
         {
             
         }
-
 
         Image createThumbnail(Image image, int w, int h)
         {
@@ -112,13 +121,13 @@ namespace WorkShop
                 flag1 = 0;
             }
             FolderPath = fbd.SelectedPath;
-            flag2 = 0;
+            
         }
-
+        int check = 0;
         private void Play_Click(object sender, EventArgs e)
         {
-            flag3 = 1;
-            if (flag2 == 0)
+
+            if (check == 0)
             {
                 movie1 = FolderPath + "top.mp4";
                 movie2 = FolderPath + "org.mp4";
@@ -135,8 +144,7 @@ namespace WorkShop
 
                 Play.ImageLocation = @"C:\play_on.png";
 
-                flag2 = 1;
-
+                
                 CurrentPosition.Maximum = (int)TopView.currentMedia.duration;
                 if (CurrentPosition.Maximum < (int)OrgView.currentMedia.duration)
                 {
@@ -146,15 +154,17 @@ namespace WorkShop
                 {
                     CurrentPosition.Maximum = (int)ParView.currentMedia.duration;
                 }
+
+                check = 1;
             }
-            else if (flag2 == 1)
+            else if (check == 1)
             {
                 TopView.Ctlcontrols.play();
                 OrgView.Ctlcontrols.play();
                 ParView.Ctlcontrols.play();
                 Play.ImageLocation = @"C:\play_on.png";
-
             }
+            
             timer1.Start();
         }
 
@@ -178,79 +188,100 @@ namespace WorkShop
         private void timer1_Tick(object sender, EventArgs e)
         {
             CurrentPosition.Value = (int)TopView.Ctlcontrols.currentPosition;
+            current.Text = CurrentPosition.Value.ToString();
+            all.Text = TopView.currentMedia.duration.ToString();
         }
 
-
-        string command = "-i C:\\ffmpeg\\bin\\movie\\output1.mp4 ";
-
+        int flag = 1; 
         private void Create_Click(object sender, EventArgs e)
         {
-            int count_all = count_top + count_org + count_par;
-            System.Diagnostics.Process p = new System.Diagnostics.Process();
-            p.StartInfo.CreateNoWindow = true;
-            
-            for (int i = 1; i < count; i++)
+            if (flag == 1)
             {
-
-                if (i >= 2)
-                {
-                    command = command + "-i C:\\ffmpeg\\bin\\movie\\output" + i + ".mp4 ";
+                for(int i = 1; i <= count; i++){
+                    ProcessStartInfo psInfo2 = new ProcessStartInfo(@"C:\ffmpeg\bin\ffmpeg");
+                    psInfo2.Arguments = @" -i C:\\ffmpeg\\bin\\movie\\input" + i + ".mp4 -vf fade=in:0:15,fade=out:29*" + intervalValue[i] + "-15:15 C:\\ffmpeg\\bin\\movie\\output" + i + ".mp4";
+                    //psInfo.CreateNoWindow = true; // コンソール・ウィンドウを開かない
+                    //psInfo.UseShellExecute = false; // シェル機能を使用しない
+                    Process.Start(psInfo2);
+                    flag = 0;
                 }
             }
-            
-            System.Diagnostics.Process.Start("C:\\ffmpeg\\bin\\ffmpeg", @"" + command + "-filter_complex " + "\"concat=n=" + count + ":v=1:a=1\" C:\\ffmpeg\\bin\\movie\\output.mp4");
-            
+            else if (flag == 0)
+            {
+
+                string command = "-filter_complex " + "\"concat=n=" + count + ":v=1:a=1\" C:\\ffmpeg\\bin\\movie\\output.mp4";
+
+                for (int i = count; i > 0; i--)
+                {
+
+                    command = "-i C:\\ffmpeg\\bin\\movie\\output" + i + ".mp4 " + command;
+                }
+                ProcessStartInfo psInfo = new ProcessStartInfo(@"C:\ffmpeg\bin\ffmpeg");
+                psInfo.Arguments = command;//@" -i C:\\ffmpeg\\bin\\movie\\input" + i + ".mp4 -vf fade=in:0:15,fade=out:29*10-15:15 C:\\ffmpeg\\bin\\movie\\output" + i + ".mp4";
+                //psInfo.CreateNoWindow = true; // コンソール・ウィンドウを開かない
+                //psInfo.UseShellExecute = false; // シェル機能を使用しない
+                Process.Start(psInfo);
+            }
         }
 
         private void TopView_Enter(object sender, EventArgs e)
         {
-
-            OpenCVTest.Class1.thumtop(CurrentPosition.Value);
-
-            Bitmap bmp = new Bitmap(TopView.Width, TopView.Height);
-
-            string url = "C:\\thum\\thum.png";
-            string ImageDir = "C:\\thum";
-
-            
-            string[] pngFiles = System.IO.Directory.GetFiles(ImageDir, "*.png");
-
-            int width = TopView.Width / 4;
-            int height = TopView.Height / 4;
-
-
-            imageList1.ImageSize = new Size(width, height);
-            Thumbnail1.LargeImageList = imageList1;
-
-
-            Image original = Bitmap.FromFile("C:\\thum\\thum.png");
-            Image thumbnail = createThumbnail(original, TopView.Width, TopView.Height);
-
-            imageList1.Images.Add(thumbnail);
-            Thumbnail1.Items.Add("C:\\thum\\thum.png", count);
-
-            original.Dispose();
-            thumbnail.Dispose();
-            count++;
-
-            System.IO.File.Delete(url);
-            
-            int start = CurrentPosition.Value - 2;
-            int end = CurrentPosition.Value + 2;
-
-            if (start <= 0)
+            if (flag1 == 0)
             {
-                start = 0;
-            }
+                OpenCVTest.Class1.thumtop(CurrentPosition.Value);
+
+                Bitmap bmp = new Bitmap(TopView.Width, TopView.Height);
+
+                string url = "C:\\thum\\thum.png";
+                string ImageDir = "C:\\thum";
+
+
+                string[] pngFiles = System.IO.Directory.GetFiles(ImageDir, "*.png");
+
+                int width = TopView.Width / 4;
+                int height = TopView.Height / 4;
+
+
+                imageList1.ImageSize = new Size(width, height);
+                Thumbnail1.LargeImageList = imageList1;
+
+
+                Image original = Bitmap.FromFile("C:\\thum\\thum.png");
+                Image thumbnail = createThumbnail(original, TopView.Width, TopView.Height);
+
+                imageList1.Images.Add(thumbnail);
+                Thumbnail1.Items.Add("C:\\thum\\thum.png", count);
+
+                original.Dispose();
+                thumbnail.Dispose();
+                count++;
+                intervalValue[count] = interval.Value;
+
+                System.IO.File.Delete(url);
+
+                int start = CurrentPosition.Value - 2;
+                int end = CurrentPosition.Value + 2;
+
+                if (start <= 0)
+                {
+                    start = 0;
+                }
+
+                string START = start.ToString();
+                string END = end.ToString();
+
+
+                ProcessStartInfo psInfo = new ProcessStartInfo(@"C:\ffmpeg\bin\ffmpeg");
+                psInfo.Arguments = @"-i C:\ffmpeg\bin\top.mp4 -t " + interval.Value + @" -ss " + START + @" C:\ffmpeg\bin\movie\input" + count + ".mp4";
+                psInfo.CreateNoWindow = true; // コンソール・ウィンドウを開かない
+                psInfo.UseShellExecute = false; // シェル機能を使用しない
+                Process.Start(psInfo);
                 
-            string START = start.ToString();
-            string END = end.ToString();
-            string command = @"-i C:\\ffmpeg\\bin\\top.mp4 -t 10 -ss " + START + " C:\\ffmpeg\\bin\\movie\\input" + count + ".mp4";
-            System.Diagnostics.Process p = new System.Diagnostics.Process();
-            p.StartInfo.CreateNoWindow = true;
-            System.Diagnostics.Process.Start("C:\\ffmpeg\\bin\\ffmpeg", command);
-            //count = count + 1;
-            this.ActiveControl = this.dummy;
+
+                Total = Total + interval.Value;
+                TotalTime.Text = Total.ToString();
+                this.ActiveControl = this.dummy;
+            }
         }
 
         private void OrgView_Enter(object sender, EventArgs e)
@@ -282,6 +313,7 @@ namespace WorkShop
             original.Dispose();
             thumbnail.Dispose();
             count++;
+            intervalValue[count] = interval.Value;
 
             System.IO.File.Delete(url);
             int start = CurrentPosition.Value - 2;
@@ -294,11 +326,15 @@ namespace WorkShop
                 
             string START = start.ToString();
             string END = end.ToString();
-            string command = @"-i C:\\ffmpeg\\bin\\org.mp4 -t 10 -ss " + START + " C:\\ffmpeg\\bin\\movie\\input" + count  + ".mp4";
-            System.Diagnostics.Process p = new System.Diagnostics.Process();
-            p.StartInfo.CreateNoWindow = true;
-            System.Diagnostics.Process.Start("C:\\ffmpeg\\bin\\ffmpeg", command);
-            //count = count + 1;
+
+            ProcessStartInfo psInfo = new ProcessStartInfo(@"C:\ffmpeg\bin\ffmpeg");
+            psInfo.Arguments = @"-i C:\ffmpeg\bin\org.mp4 -t " + interval.Value + @" -ss " + START + @" C:\ffmpeg\bin\movie\input" + count + ".mp4";
+            psInfo.CreateNoWindow = true; // コンソール・ウィンドウを開かない
+            psInfo.UseShellExecute = false; // シェル機能を使用しない
+            Process.Start(psInfo); 
+            
+            Total = Total + interval.Value;
+            TotalTime.Text = Total.ToString();
             this.ActiveControl = this.dummy;
         }
 
@@ -327,10 +363,10 @@ namespace WorkShop
 
             imageList1.Images.Add(thumbnail);
             Thumbnail1.Items.Add("C:\\thum\\thum.png", count);
-            //Thumbnail1.ScrollIntoView("C:\\thum\\thum.png", count-1);
             original.Dispose();
             thumbnail.Dispose();
             count++;
+            intervalValue[count] = interval.Value;
 
             System.IO.File.Delete(url);
             int start = CurrentPosition.Value - 2;
@@ -343,12 +379,15 @@ namespace WorkShop
                 
             string START = start.ToString();
             string END = end.ToString();
-            
-            string command = @"-i C:\\ffmpeg\\bin\\par.mp4 -t 10 -ss " + START + " C:\\ffmpeg\\bin\\movie\\input" + count + ".mp4";
-            System.Diagnostics.Process p = new System.Diagnostics.Process();
-            p.StartInfo.CreateNoWindow = true;
-            System.Diagnostics.Process.Start("C:\\ffmpeg\\bin\\ffmpeg", command);
-            //count = count + 1;
+
+            ProcessStartInfo psInfo = new ProcessStartInfo(@"C:\ffmpeg\bin\ffmpeg");
+            psInfo.Arguments = @"-i C:\ffmpeg\bin\par.mp4 -t " + interval.Value + @" -ss " + START + @" C:\ffmpeg\bin\movie\input" + count + ".mp4";
+            psInfo.CreateNoWindow = true; // コンソール・ウィンドウを開かない
+            psInfo.UseShellExecute = false; // シェル機能を使用しない
+            Process.Start(psInfo);
+
+            Total = Total + interval.Value;
+            TotalTime.Text = Total.ToString();
             this.ActiveControl = this.dummy;
         }
 
@@ -710,35 +749,6 @@ namespace WorkShop
 
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process.Start("C:\\ffmpeg\\bin\\ffmpeg", @" -i C:\\ffmpeg\\bin\\movie\\output.mp4 -vcodec copy -map 0:0 C:\\ffmpeg\\bin\\destination.mp4");
-            if (musicList.SelectedIndex == 0)
-            {
-                System.Diagnostics.Process.Start("C:\\ffmpeg\\bin\\ffmpeg", @" -i C:\\ffmpeg\\bin\\destination.mp4 -i C:\\ffmpeg\\bin\\情熱大陸s.mp3 -vcodec copy -acodec copy C:\\ffmpeg\\bin\\movie\\Newoutput.mp4");
-            }else if (musicList.SelectedIndex == 1)
-            {
-                System.Diagnostics.Process.Start("C:\\ffmpeg\\bin\\ffmpeg", @" -i C:\\ffmpeg\\bin\\destination.mp4 -i C:\\ffmpeg\\bin\\情熱大陸e.mp3 -vcodec copy -acodec copy C:\\ffmpeg\\bin\\movie\\Newoutput.mp4");
-            }
-            else if (musicList.SelectedIndex == 2)
-            {
-                System.Diagnostics.Process.Start("C:\\ffmpeg\\bin\\ffmpeg", @" -i C:\\ffmpeg\\bin\\destination.mp4 -i C:\\ffmpeg\\bin\\Progress.mp3 -vcodec copy -acodec copy C:\\ffmpeg\\bin\\movie\\Newoutput.mp4");
-            }
-            else if (musicList.SelectedIndex == 3)
-            {
-                System.Diagnostics.Process.Start("C:\\ffmpeg\\bin\\ffmpeg", @" -i C:\\ffmpeg\\bin\\destination.mp4 -i C:\\ffmpeg\\bin\\カンブリア宮殿.mp3 -vcodec copy -acodec copy C:\\ffmpeg\\bin\\movie\\Newoutput.mp4");
-            }
-            else if (musicList.SelectedIndex == 4)
-            {
-                System.Diagnostics.Process.Start("C:\\ffmpeg\\bin\\ffmpeg", @" -i C:\\ffmpeg\\bin\\destination.mp4 -i C:\\ffmpeg\\bin\\地上の星.mp3 -vcodec copy -acodec copy C:\\ffmpeg\\bin\\movie\\Newoutput.mp4");
-            }
-
-
-
-
-
-        }
-
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -751,79 +761,277 @@ namespace WorkShop
             if (musicList.SelectedIndex == 0)
             {
                 player.settings.setMode("loop", false);
-                player.URL = @"C:\\ffmpeg\\bin\\情熱大陸s.mp3";
+                player.URL = @"C:\\ffmpeg\\bin\\music\\bgmpiano(1).mp3";
             }
             else if (musicList.SelectedIndex == 1)
             {
                 player.settings.setMode("loop", false);
-                player.URL = @"C:\\ffmpeg\\bin\\情熱大陸e.mp3";
+                player.URL = @"C:\\ffmpeg\\bin\\music\\bgmpiano(2).mp3";
             }
             else if (musicList.SelectedIndex == 2)
             {
                 player.settings.setMode("loop", false);
-                player.URL = @"C:\\ffmpeg\\bin\\Progress.mp3";
+                player.URL = @"C:\\ffmpeg\\bin\\music\\bgmpiano(3).mp3";
             }
             else if (musicList.SelectedIndex == 3)
             {
                 player.settings.setMode("loop", false);
-                player.URL = @"C:\\ffmpeg\\bin\\カンブリア宮殿.mp3";
+                player.URL = @"C:\\ffmpeg\\bin\\music\\bgmpiano(4).mp3";
             }
             else if (musicList.SelectedIndex == 4)
             {
                 player.settings.setMode("loop", false);
-                player.URL = @"C:\\ffmpeg\\bin\\地上の星.mp3";
+                player.URL = @"C:\\ffmpeg\\bin\\music\\bgmpiano(5).mp3";
             }
+            else if (musicList.SelectedIndex == 5)
+            {
+                player.settings.setMode("loop", false);
+                player.URL = @"C:\\ffmpeg\\bin\\music\\bgmguitar(1).mp3";
+            }
+            else if (musicList.SelectedIndex == 6)
+            {
+                player.settings.setMode("loop", false);
+                player.URL = @"C:\\ffmpeg\\bin\\music\\bgmguitar(2).mp3";
+            }
+            else if (musicList.SelectedIndex == 7)
+            {
+                player.settings.setMode("loop", false);
+                player.URL = @"C:\\ffmpeg\\bin\\music\\bgmguitar(3).mp3";
+            }
+            else if (musicList.SelectedIndex == 8)
+            {
+                player.settings.setMode("loop", false);
+                player.URL = @"C:\\ffmpeg\\bin\\music\\bgmguitar(4).mp3";
+            }
+            else if (musicList.SelectedIndex == 9)
+            {
+                player.settings.setMode("loop", false);
+                player.URL = @"C:\\ffmpeg\\bin\\music\\bgmguitar(5).mp3";
+            }
+            
         }
-
-        private void trackBar1_Scroll(object sender, EventArgs e)
+        int f = 1;
+        private void bgm_Click(object sender, EventArgs e)
         {
-            TopView.settings.rate = trackBar1.Value;
-            OrgView.settings.rate = trackBar1.Value;
-            ParView.settings.rate = trackBar1.Value;
-            if (trackBar1.Value == 1)
+            if (f == 1)
             {
-                PlaySpeedValue.ImageLocation = @"C:\1.png";
+                ProcessStartInfo ps = new ProcessStartInfo(@"C:\ffmpeg\bin\ffmpeg");
+                ps.Arguments = @" -i C:\\ffmpeg\\bin\\movie\\output.mp4 -vcodec copy -map 0:0 C:\\ffmpeg\\bin\\destination.mp4";
+                //ps.CreateNoWindow = true; // コンソール・ウィンドウを開かない
+                //ps.UseShellExecute = false; // シェル機能を使用しない
+                Process.Start(ps);
             }
-            else if (trackBar1.Value == 2)
+            
+            if (musicList.SelectedIndex == 0)
             {
-                PlaySpeedValue.ImageLocation = @"C:\2.png";
+                if (f == 1)
+                {
+                    ProcessStartInfo psInfo = new ProcessStartInfo(@"C:\ffmpeg\bin\ffmpeg");
+                    psInfo.Arguments = @" -i C:\\ffmpeg\\bin\\music\\bgmpiano(1).mp3 -t " + Total + " C:\\ffmpeg\\bin\\music\\bgm.mp3";
+                    //psInfo.CreateNoWindow = true; // コンソール・ウィンドウを開かない
+                    //psInfo.UseShellExecute = false; // シェル機能を使用しない
+                    Process.Start(psInfo);
+                    f = 0;
+                }
+                else if (f == 0)
+                {
+                    ProcessStartInfo psInfo2 = new ProcessStartInfo(@"C:\ffmpeg\bin\ffmpeg");
+                    psInfo2.Arguments = @" -i C:\\ffmpeg\\bin\\destination.mp4 -i C:\\ffmpeg\\bin\\music\\bgm.mp3 -vcodec copy -acodec copy C:\\ffmpeg\\bin\\movie\\Newoutput.mp4";
+                    //psInfo2.CreateNoWindow = true; // コンソール・ウィンドウを開かない
+                    //psInfo2.UseShellExecute = false; // シェル機能を使用しない
+                    Process.Start(psInfo2);
+                }
             }
-            else if (trackBar1.Value == 3)
+            else if (musicList.SelectedIndex == 1)
             {
-                PlaySpeedValue.ImageLocation = @"C:\3.png";
+                if (f == 1)
+                {
+                    ProcessStartInfo psInfo = new ProcessStartInfo(@"C:\ffmpeg\bin\ffmpeg");
+                    psInfo.Arguments = @" -i C:\\ffmpeg\\bin\\music\\bgmpiano(2).mp3 -t " + Total + " C:\\ffmpeg\\bin\\music\\bgm.mp3";
+                    //psInfo.CreateNoWindow = true; // コンソール・ウィンドウを開かない
+                    //psInfo.UseShellExecute = false; // シェル機能を使用しない
+                    Process.Start(psInfo);
+                    f = 0;
+                }
+                else if (f == 0)
+                {
+                    ProcessStartInfo psInfo2 = new ProcessStartInfo(@"C:\ffmpeg\bin\ffmpeg");
+                    psInfo2.Arguments = @" -i C:\\ffmpeg\\bin\\destination.mp4 -i C:\\ffmpeg\\bin\\music\\bgm.mp3 -vcodec copy -acodec copy C:\\ffmpeg\\bin\\movie\\Newoutput.mp4";
+                    //psInfo2.CreateNoWindow = true; // コンソール・ウィンドウを開かない
+                    //psInfo2.UseShellExecute = false; // シェル機能を使用しない
+                    Process.Start(psInfo2);
+                }
             }
-            else if (trackBar1.Value == 4)
+            else if (musicList.SelectedIndex == 2)
             {
-                PlaySpeedValue.ImageLocation = @"C:\4.png";
+                if (f == 1)
+                {
+                    ProcessStartInfo psInfo = new ProcessStartInfo(@"C:\ffmpeg\bin\ffmpeg");
+                    psInfo.Arguments = @" -i C:\\ffmpeg\\bin\\music\\bgmpiano(3).mp3 -t " + Total + " C:\\ffmpeg\\bin\\music\\bgm.mp3";
+                    //psInfo.CreateNoWindow = true; // コンソール・ウィンドウを開かない
+                    //psInfo.UseShellExecute = false; // シェル機能を使用しない
+                    Process.Start(psInfo);
+                    f = 0;
+                }
+                else if (f == 0)
+                {
+                    ProcessStartInfo psInfo2 = new ProcessStartInfo(@"C:\ffmpeg\bin\ffmpeg");
+                    psInfo2.Arguments = @" -i C:\\ffmpeg\\bin\\destination.mp4 -i C:\\ffmpeg\\bin\\music\\bgm.mp3 -vcodec copy -acodec copy C:\\ffmpeg\\bin\\movie\\Newoutput.mp4";
+                    //psInfo2.CreateNoWindow = true; // コンソール・ウィンドウを開かない
+                    //psInfo2.UseShellExecute = false; // シェル機能を使用しない
+                    Process.Start(psInfo2);
+                }
             }
-            else if (trackBar1.Value == 5)
+            else if (musicList.SelectedIndex == 3)
             {
-                PlaySpeedValue.ImageLocation = @"C:\5.png";
+                if (f == 1)
+                {
+                    ProcessStartInfo psInfo = new ProcessStartInfo(@"C:\ffmpeg\bin\ffmpeg");
+                    psInfo.Arguments = @" -i C:\\ffmpeg\\bin\\music\\bgmpiano(4).mp3 -t " + Total + " C:\\ffmpeg\\bin\\music\\bgm.mp3";
+                    //psInfo.CreateNoWindow = true; // コンソール・ウィンドウを開かない
+                    //psInfo.UseShellExecute = false; // シェル機能を使用しない
+                    Process.Start(psInfo);
+                    f = 0;
+                }
+                else if (f == 0)
+                {
+                    ProcessStartInfo psInfo2 = new ProcessStartInfo(@"C:\ffmpeg\bin\ffmpeg");
+                    psInfo2.Arguments = @" -i C:\\ffmpeg\\bin\\destination.mp4 -i C:\\ffmpeg\\bin\\music\\bgm.mp3 -vcodec copy -acodec copy C:\\ffmpeg\\bin\\movie\\Newoutput.mp4";
+                    //psInfo2.CreateNoWindow = true; // コンソール・ウィンドウを開かない
+                    //psInfo2.UseShellExecute = false; // シェル機能を使用しない
+                    Process.Start(psInfo2);
+                }
             }
-            else if (trackBar1.Value == 6)
+            else if (musicList.SelectedIndex == 4)
             {
-                PlaySpeedValue.ImageLocation = @"C:\6.png";
+                if (f == 1)
+                {
+                    ProcessStartInfo psInfo = new ProcessStartInfo(@"C:\ffmpeg\bin\ffmpeg");
+                    psInfo.Arguments = @" -i C:\\ffmpeg\\bin\\music\\bgmpiano(5).mp3 -t " + Total + " C:\\ffmpeg\\bin\\music\\bgm.mp3";
+                    //psInfo.CreateNoWindow = true; // コンソール・ウィンドウを開かない
+                    //psInfo.UseShellExecute = false; // シェル機能を使用しない
+                    Process.Start(psInfo);
+                    f = 0;
+                }
+                else if (f == 0)
+                {
+                    ProcessStartInfo psInfo2 = new ProcessStartInfo(@"C:\ffmpeg\bin\ffmpeg");
+                    psInfo2.Arguments = @" -i C:\\ffmpeg\\bin\\destination.mp4 -i C:\\ffmpeg\\bin\\music\\bgm.mp3 -vcodec copy -acodec copy C:\\ffmpeg\\bin\\movie\\Newoutput.mp4";
+                    //psInfo2.CreateNoWindow = true; // コンソール・ウィンドウを開かない
+                    //psInfo2.UseShellExecute = false; // シェル機能を使用しない
+                    Process.Start(psInfo2);
+                }
             }
-            else if (trackBar1.Value == 7)
+            else if (musicList.SelectedIndex == 5)
             {
-                PlaySpeedValue.ImageLocation = @"C:\7.png";
+                if (f == 1)
+                {
+                    ProcessStartInfo psInfo = new ProcessStartInfo(@"C:\ffmpeg\bin\ffmpeg");
+                    psInfo.Arguments = @" -i C:\\ffmpeg\\bin\\music\\bgmguitar(1).mp3 -t " + Total + " C:\\ffmpeg\\bin\\music\\bgm.mp3";
+                    //psInfo.CreateNoWindow = true; // コンソール・ウィンドウを開かない
+                    //psInfo.UseShellExecute = false; // シェル機能を使用しない
+                    Process.Start(psInfo);
+                    f = 0;
+                }
+                else if (f == 0)
+                {
+                    ProcessStartInfo psInfo2 = new ProcessStartInfo(@"C:\ffmpeg\bin\ffmpeg");
+                    psInfo2.Arguments = @" -i C:\\ffmpeg\\bin\\destination.mp4 -i C:\\ffmpeg\\bin\\music\\bgm.mp3 -vcodec copy -acodec copy C:\\ffmpeg\\bin\\movie\\Newoutput.mp4";
+                    //psInfo2.CreateNoWindow = true; // コンソール・ウィンドウを開かない
+                    //psInfo2.UseShellExecute = false; // シェル機能を使用しない
+                    Process.Start(psInfo2);
+                }
             }
-            else if (trackBar1.Value == 8)
+            else if (musicList.SelectedIndex == 6)
             {
-                PlaySpeedValue.ImageLocation = @"C:\8.png";
+                if (f == 1)
+                {
+                    ProcessStartInfo psInfo = new ProcessStartInfo(@"C:\ffmpeg\bin\ffmpeg");
+                    psInfo.Arguments = @" -i C:\\ffmpeg\\bin\\music\\bgmguitar(2).mp3 -t " + Total + " C:\\ffmpeg\\bin\\music\\bgm.mp3";
+                    //psInfo.CreateNoWindow = true; // コンソール・ウィンドウを開かない
+                    //psInfo.UseShellExecute = false; // シェル機能を使用しない
+                    Process.Start(psInfo);
+                    f = 0;
+                }
+                else if (f == 0)
+                {
+                    ProcessStartInfo psInfo2 = new ProcessStartInfo(@"C:\ffmpeg\bin\ffmpeg");
+                    psInfo2.Arguments = @" -i C:\\ffmpeg\\bin\\destination.mp4 -i C:\\ffmpeg\\bin\\music\\bgm.mp3 -vcodec copy -acodec copy C:\\ffmpeg\\bin\\movie\\Newoutput.mp4";
+                    //psInfo2.CreateNoWindow = true; // コンソール・ウィンドウを開かない
+                    //psInfo2.UseShellExecute = false; // シェル機能を使用しない
+                    Process.Start(psInfo2);
+                }
+            }
+            else if (musicList.SelectedIndex == 7)
+            {
+                if (f == 1)
+                {
+                    ProcessStartInfo psInfo = new ProcessStartInfo(@"C:\ffmpeg\bin\ffmpeg");
+                    psInfo.Arguments = @" -i C:\\ffmpeg\\bin\\music\\bgmguitar(3).mp3 -t " + Total + " C:\\ffmpeg\\bin\\music\\bgm.mp3";
+                    //psInfo.CreateNoWindow = true; // コンソール・ウィンドウを開かない
+                    //psInfo.UseShellExecute = false; // シェル機能を使用しない
+                    Process.Start(psInfo);
+                    f = 0;
+                }
+                else if (f == 0)
+                {
+                    ProcessStartInfo psInfo2 = new ProcessStartInfo(@"C:\ffmpeg\bin\ffmpeg");
+                    psInfo2.Arguments = @" -i C:\\ffmpeg\\bin\\destination.mp4 -i C:\\ffmpeg\\bin\\music\\bgm.mp3 -vcodec copy -acodec copy C:\\ffmpeg\\bin\\movie\\Newoutput.mp4";
+                    //psInfo2.CreateNoWindow = true; // コンソール・ウィンドウを開かない
+                    //psInfo2.UseShellExecute = false; // シェル機能を使用しない
+                    Process.Start(psInfo2);
+                }
+            }
+            else if (musicList.SelectedIndex == 8)
+            {
+                if (f == 1)
+                {
+                    ProcessStartInfo psInfo = new ProcessStartInfo(@"C:\ffmpeg\bin\ffmpeg");
+                    psInfo.Arguments = @" -i C:\\ffmpeg\\bin\\music\\bgmguitar(4).mp3 -t " + Total + " C:\\ffmpeg\\bin\\music\\bgm.mp3";
+                    //psInfo.CreateNoWindow = true; // コンソール・ウィンドウを開かない
+                    //psInfo.UseShellExecute = false; // シェル機能を使用しない
+                    Process.Start(psInfo);
+                    f = 0;
+                }
+                else if (f == 0)
+                {
+                    ProcessStartInfo psInfo2 = new ProcessStartInfo(@"C:\ffmpeg\bin\ffmpeg");
+                    psInfo2.Arguments = @" -i C:\\ffmpeg\\bin\\destination.mp4 -i C:\\ffmpeg\\bin\\music\\bgm.mp3 -vcodec copy -acodec copy C:\\ffmpeg\\bin\\movie\\Newoutput.mp4";
+                    //psInfo2.CreateNoWindow = true; // コンソール・ウィンドウを開かない
+                    //psInfo2.UseShellExecute = false; // シェル機能を使用しない
+                    Process.Start(psInfo2);
+                }
+            }
+            else if (musicList.SelectedIndex == 9)
+            {
+                if (f == 1)
+                {
+                    ProcessStartInfo psInfo = new ProcessStartInfo(@"C:\ffmpeg\bin\ffmpeg");
+                    psInfo.Arguments = @" -i C:\\ffmpeg\\bin\\music\\bgmguitar(5).mp3 -t " + Total + " C:\\ffmpeg\\bin\\music\\bgm.mp3";
+                    //psInfo.CreateNoWindow = true; // コンソール・ウィンドウを開かない
+                    //psInfo.UseShellExecute = false; // シェル機能を使用しない
+                    Process.Start(psInfo);
+                    f = 0;
+                }
+                else if (f == 0)
+                {
+                    ProcessStartInfo psInfo2 = new ProcessStartInfo(@"C:\ffmpeg\bin\ffmpeg");
+                    psInfo2.Arguments = @" -i C:\\ffmpeg\\bin\\destination.mp4 -i C:\\ffmpeg\\bin\\music\\bgm.mp3 -vcodec copy -acodec copy C:\\ffmpeg\\bin\\movie\\Newoutput.mp4";
+                    //psInfo2.CreateNoWindow = true; // コンソール・ウィンドウを開かない
+                    //psInfo2.UseShellExecute = false; // シェル機能を使用しない
+                    Process.Start(psInfo2);
+                }
             }
         }
 
-        private void fade_Click(object sender, EventArgs e)
+        private void interval_Scroll(object sender, EventArgs e)
         {
-            int count_all = count_top + count_org + count_par;
-            System.Diagnostics.Process p = new System.Diagnostics.Process();
-            p.StartInfo.CreateNoWindow = true;
-            for (int i = 1; i <= count; i++){
-                System.Diagnostics.Process.Start("C:\\ffmpeg\\bin\\ffmpeg", @" -i C:\\ffmpeg\\bin\\movie\\input" + i + ".mp4 -vf fade=in:0:15,fade=out:29*10-15:15 C:\\ffmpeg\\bin\\movie\\output" + i + ".mp4");
-            }
+            
         }
 
-        
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -31,9 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.Select = new System.Windows.Forms.PictureBox();
-            this.PlaySpeedValue = new System.Windows.Forms.PictureBox();
-            this.PlaySpeed = new System.Windows.Forms.PictureBox();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.TopView = new AxWMPLib.AxWindowsMediaPlayer();
             this.OrgView = new AxWMPLib.AxWindowsMediaPlayer();
             this.ParView = new AxWMPLib.AxWindowsMediaPlayer();
@@ -77,14 +74,16 @@
             this.par2 = new System.Windows.Forms.PictureBox();
             this.par1 = new System.Windows.Forms.PictureBox();
             this.dummy = new AxWMPLib.AxWindowsMediaPlayer();
-            this.fade = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.bgm = new System.Windows.Forms.PictureBox();
             this.musicList = new System.Windows.Forms.ComboBox();
             this.Listen = new System.Windows.Forms.PictureBox();
+            this.TotalTime = new System.Windows.Forms.Label();
+            this.interval = new System.Windows.Forms.TrackBar();
+            this.current = new System.Windows.Forms.Label();
+            this.all = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Select)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PlaySpeedValue)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PlaySpeed)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TopView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.OrgView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ParView)).BeginInit();
@@ -123,56 +122,24 @@
             ((System.ComponentModel.ISupportInitialize)(this.par2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.par1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dummy)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fade)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bgm)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Listen)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.interval)).BeginInit();
             this.SuspendLayout();
             // 
             // Select
             // 
-            this.Select.Location = new System.Drawing.Point(16, 15);
-            this.Select.Margin = new System.Windows.Forms.Padding(4);
+            this.Select.Location = new System.Drawing.Point(12, 12);
             this.Select.Name = "Select";
-            this.Select.Size = new System.Drawing.Size(233, 78);
+            this.Select.Size = new System.Drawing.Size(244, 80);
             this.Select.TabIndex = 0;
             this.Select.TabStop = false;
             this.Select.Click += new System.EventHandler(this.Select_Click);
             // 
-            // PlaySpeedValue
-            // 
-            this.PlaySpeedValue.Location = new System.Drawing.Point(497, 15);
-            this.PlaySpeedValue.Margin = new System.Windows.Forms.Padding(4);
-            this.PlaySpeedValue.Name = "PlaySpeedValue";
-            this.PlaySpeedValue.Size = new System.Drawing.Size(99, 78);
-            this.PlaySpeedValue.TabIndex = 1;
-            this.PlaySpeedValue.TabStop = false;
-            // 
-            // PlaySpeed
-            // 
-            this.PlaySpeed.Location = new System.Drawing.Point(257, 15);
-            this.PlaySpeed.Margin = new System.Windows.Forms.Padding(4);
-            this.PlaySpeed.Name = "PlaySpeed";
-            this.PlaySpeed.Size = new System.Drawing.Size(232, 78);
-            this.PlaySpeed.TabIndex = 2;
-            this.PlaySpeed.TabStop = false;
-            // 
-            // trackBar1
-            // 
-            this.trackBar1.Location = new System.Drawing.Point(604, 36);
-            this.trackBar1.Margin = new System.Windows.Forms.Padding(4);
-            this.trackBar1.Maximum = 8;
-            this.trackBar1.Minimum = 1;
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(533, 56);
-            this.trackBar1.TabIndex = 3;
-            this.trackBar1.Value = 1;
-            this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
-            // 
             // TopView
             // 
             this.TopView.Enabled = true;
-            this.TopView.Location = new System.Drawing.Point(12, 80);
-            this.TopView.Margin = new System.Windows.Forms.Padding(4);
+            this.TopView.Location = new System.Drawing.Point(12, 103);
             this.TopView.Name = "TopView";
             this.TopView.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("TopView.OcxState")));
             this.TopView.Size = new System.Drawing.Size(500, 287);
@@ -183,8 +150,7 @@
             // OrgView
             // 
             this.OrgView.Enabled = true;
-            this.OrgView.Location = new System.Drawing.Point(517, 80);
-            this.OrgView.Margin = new System.Windows.Forms.Padding(4);
+            this.OrgView.Location = new System.Drawing.Point(517, 103);
             this.OrgView.Name = "OrgView";
             this.OrgView.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("OrgView.OcxState")));
             this.OrgView.Size = new System.Drawing.Size(500, 287);
@@ -195,8 +161,7 @@
             // ParView
             // 
             this.ParView.Enabled = true;
-            this.ParView.Location = new System.Drawing.Point(1024, 80);
-            this.ParView.Margin = new System.Windows.Forms.Padding(4);
+            this.ParView.Location = new System.Drawing.Point(1024, 103);
             this.ParView.Name = "ParView";
             this.ParView.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("ParView.OcxState")));
             this.ParView.Size = new System.Drawing.Size(500, 287);
@@ -206,20 +171,18 @@
             // 
             // Play
             // 
-            this.Play.Location = new System.Drawing.Point(16, 468);
-            this.Play.Margin = new System.Windows.Forms.Padding(4);
+            this.Play.Location = new System.Drawing.Point(12, 396);
             this.Play.Name = "Play";
-            this.Play.Size = new System.Drawing.Size(133, 125);
+            this.Play.Size = new System.Drawing.Size(100, 100);
             this.Play.TabIndex = 7;
             this.Play.TabStop = false;
             this.Play.Click += new System.EventHandler(this.Play_Click);
             // 
             // Stop
             // 
-            this.Stop.Location = new System.Drawing.Point(16, 598);
-            this.Stop.Margin = new System.Windows.Forms.Padding(4);
+            this.Stop.Location = new System.Drawing.Point(118, 396);
             this.Stop.Name = "Stop";
-            this.Stop.Size = new System.Drawing.Size(133, 125);
+            this.Stop.Size = new System.Drawing.Size(100, 100);
             this.Stop.TabIndex = 8;
             this.Stop.TabStop = false;
             this.Stop.Click += new System.EventHandler(this.Stop_Click);
@@ -227,11 +190,10 @@
             // CurrentPosition
             // 
             this.CurrentPosition.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.CurrentPosition.Location = new System.Drawing.Point(157, 468);
-            this.CurrentPosition.Margin = new System.Windows.Forms.Padding(4);
+            this.CurrentPosition.Location = new System.Drawing.Point(224, 396);
             this.CurrentPosition.Maximum = 5;
             this.CurrentPosition.Name = "CurrentPosition";
-            this.CurrentPosition.Size = new System.Drawing.Size(1736, 56);
+            this.CurrentPosition.Size = new System.Drawing.Size(1300, 45);
             this.CurrentPosition.TabIndex = 9;
             this.CurrentPosition.Scroll += new System.EventHandler(this.CurrentPosition_Scroll);
             // 
@@ -241,19 +203,17 @@
             this.Thumbnail1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.Thumbnail1.Font = new System.Drawing.Font("MS UI Gothic", 1.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.Thumbnail1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.Thumbnail1.Location = new System.Drawing.Point(16, 850);
-            this.Thumbnail1.Margin = new System.Windows.Forms.Padding(4);
+            this.Thumbnail1.Location = new System.Drawing.Point(12, 680);
             this.Thumbnail1.Name = "Thumbnail1";
-            this.Thumbnail1.Size = new System.Drawing.Size(1543, 139);
+            this.Thumbnail1.Size = new System.Drawing.Size(1100, 112);
             this.Thumbnail1.TabIndex = 1000;
             this.Thumbnail1.UseCompatibleStateImageBehavior = false;
             // 
             // Create
             // 
-            this.Create.Location = new System.Drawing.Point(1567, 742);
-            this.Create.Margin = new System.Windows.Forms.Padding(4);
+            this.Create.Location = new System.Drawing.Point(1118, 710);
             this.Create.Name = "Create";
-            this.Create.Size = new System.Drawing.Size(326, 100);
+            this.Create.Size = new System.Drawing.Size(244, 80);
             this.Create.TabIndex = 13;
             this.Create.TabStop = false;
             this.Create.Click += new System.EventHandler(this.Create_Click);
@@ -282,300 +242,270 @@
             // 
             // top1
             // 
-            this.top1.Location = new System.Drawing.Point(336, 532);
-            this.top1.Margin = new System.Windows.Forms.Padding(4);
+            this.top1.Location = new System.Drawing.Point(356, 478);
             this.top1.Name = "top1";
-            this.top1.Size = new System.Drawing.Size(120, 59);
+            this.top1.Size = new System.Drawing.Size(120, 64);
             this.top1.TabIndex = 101;
             this.top1.TabStop = false;
             this.top1.Click += new System.EventHandler(this.top1_Click);
             // 
             // top2
             // 
-            this.top2.Location = new System.Drawing.Point(515, 532);
-            this.top2.Margin = new System.Windows.Forms.Padding(4);
+            this.top2.Location = new System.Drawing.Point(487, 477);
             this.top2.Name = "top2";
-            this.top2.Size = new System.Drawing.Size(120, 59);
+            this.top2.Size = new System.Drawing.Size(120, 64);
             this.top2.TabIndex = 102;
             this.top2.TabStop = false;
             this.top2.Click += new System.EventHandler(this.top2_Click);
             // 
             // top3
             // 
-            this.top3.Location = new System.Drawing.Point(694, 534);
-            this.top3.Margin = new System.Windows.Forms.Padding(4);
+            this.top3.Location = new System.Drawing.Point(618, 478);
             this.top3.Name = "top3";
-            this.top3.Size = new System.Drawing.Size(120, 59);
+            this.top3.Size = new System.Drawing.Size(120, 64);
             this.top3.TabIndex = 103;
             this.top3.TabStop = false;
             this.top3.Click += new System.EventHandler(this.top3_Click);
             // 
             // top4
             // 
-            this.top4.Location = new System.Drawing.Point(873, 534);
-            this.top4.Margin = new System.Windows.Forms.Padding(4);
+            this.top4.Location = new System.Drawing.Point(749, 478);
             this.top4.Name = "top4";
-            this.top4.Size = new System.Drawing.Size(120, 59);
+            this.top4.Size = new System.Drawing.Size(120, 64);
             this.top4.TabIndex = 104;
             this.top4.TabStop = false;
             this.top4.Click += new System.EventHandler(this.top4_Click);
             // 
             // top5
             // 
-            this.top5.Location = new System.Drawing.Point(1052, 534);
-            this.top5.Margin = new System.Windows.Forms.Padding(4);
+            this.top5.Location = new System.Drawing.Point(880, 478);
             this.top5.Name = "top5";
-            this.top5.Size = new System.Drawing.Size(120, 59);
+            this.top5.Size = new System.Drawing.Size(120, 64);
             this.top5.TabIndex = 105;
             this.top5.TabStop = false;
             this.top5.Click += new System.EventHandler(this.top5_Click);
             // 
             // top6
             // 
-            this.top6.Location = new System.Drawing.Point(1231, 534);
-            this.top6.Margin = new System.Windows.Forms.Padding(4);
+            this.top6.Location = new System.Drawing.Point(1011, 478);
             this.top6.Name = "top6";
-            this.top6.Size = new System.Drawing.Size(120, 59);
+            this.top6.Size = new System.Drawing.Size(120, 64);
             this.top6.TabIndex = 106;
             this.top6.TabStop = false;
             this.top6.Click += new System.EventHandler(this.top6_Click);
             // 
             // top7
             // 
-            this.top7.Location = new System.Drawing.Point(1410, 534);
-            this.top7.Margin = new System.Windows.Forms.Padding(4);
+            this.top7.Location = new System.Drawing.Point(1142, 478);
             this.top7.Name = "top7";
-            this.top7.Size = new System.Drawing.Size(120, 59);
+            this.top7.Size = new System.Drawing.Size(120, 64);
             this.top7.TabIndex = 107;
             this.top7.TabStop = false;
             this.top7.Click += new System.EventHandler(this.top7_Click);
             // 
             // top8
             // 
-            this.top8.Location = new System.Drawing.Point(1589, 534);
-            this.top8.Margin = new System.Windows.Forms.Padding(4);
+            this.top8.Location = new System.Drawing.Point(1273, 478);
             this.top8.Name = "top8";
-            this.top8.Size = new System.Drawing.Size(120, 59);
+            this.top8.Size = new System.Drawing.Size(120, 64);
             this.top8.TabIndex = 108;
             this.top8.TabStop = false;
             this.top8.Click += new System.EventHandler(this.top8_Click);
             // 
             // top9
             // 
-            this.top9.Location = new System.Drawing.Point(1768, 534);
-            this.top9.Margin = new System.Windows.Forms.Padding(4);
+            this.top9.Location = new System.Drawing.Point(1404, 478);
             this.top9.Name = "top9";
-            this.top9.Size = new System.Drawing.Size(120, 59);
+            this.top9.Size = new System.Drawing.Size(120, 64);
             this.top9.TabIndex = 109;
             this.top9.TabStop = false;
             this.top9.Click += new System.EventHandler(this.top9_Click);
             // 
             // top0
             // 
-            this.top0.Location = new System.Drawing.Point(157, 532);
-            this.top0.Margin = new System.Windows.Forms.Padding(4);
+            this.top0.Location = new System.Drawing.Point(224, 478);
             this.top0.Name = "top0";
-            this.top0.Size = new System.Drawing.Size(120, 59);
+            this.top0.Size = new System.Drawing.Size(120, 64);
             this.top0.TabIndex = 110;
             this.top0.TabStop = false;
             this.top0.Click += new System.EventHandler(this.top0_Click);
             // 
             // org0
             // 
-            this.org0.Location = new System.Drawing.Point(157, 598);
-            this.org0.Margin = new System.Windows.Forms.Padding(4);
+            this.org0.Location = new System.Drawing.Point(224, 545);
             this.org0.Name = "org0";
-            this.org0.Size = new System.Drawing.Size(120, 59);
+            this.org0.Size = new System.Drawing.Size(120, 64);
             this.org0.TabIndex = 120;
             this.org0.TabStop = false;
             this.org0.Click += new System.EventHandler(this.org0_Click);
             // 
             // org9
             // 
-            this.org9.Location = new System.Drawing.Point(1768, 598);
-            this.org9.Margin = new System.Windows.Forms.Padding(4);
+            this.org9.Location = new System.Drawing.Point(1404, 545);
             this.org9.Name = "org9";
-            this.org9.Size = new System.Drawing.Size(120, 59);
+            this.org9.Size = new System.Drawing.Size(120, 64);
             this.org9.TabIndex = 119;
             this.org9.TabStop = false;
             this.org9.Click += new System.EventHandler(this.org9_Click);
             // 
             // org8
             // 
-            this.org8.Location = new System.Drawing.Point(1589, 598);
-            this.org8.Margin = new System.Windows.Forms.Padding(4);
+            this.org8.Location = new System.Drawing.Point(1273, 545);
             this.org8.Name = "org8";
-            this.org8.Size = new System.Drawing.Size(120, 59);
+            this.org8.Size = new System.Drawing.Size(120, 64);
             this.org8.TabIndex = 118;
             this.org8.TabStop = false;
             this.org8.Click += new System.EventHandler(this.org8_Click);
             // 
             // org7
             // 
-            this.org7.Location = new System.Drawing.Point(1410, 598);
-            this.org7.Margin = new System.Windows.Forms.Padding(4);
+            this.org7.Location = new System.Drawing.Point(1142, 545);
             this.org7.Name = "org7";
-            this.org7.Size = new System.Drawing.Size(120, 59);
+            this.org7.Size = new System.Drawing.Size(120, 64);
             this.org7.TabIndex = 117;
             this.org7.TabStop = false;
             this.org7.Click += new System.EventHandler(this.org7_Click);
             // 
             // org6
             // 
-            this.org6.Location = new System.Drawing.Point(1231, 598);
-            this.org6.Margin = new System.Windows.Forms.Padding(4);
+            this.org6.Location = new System.Drawing.Point(1011, 545);
             this.org6.Name = "org6";
-            this.org6.Size = new System.Drawing.Size(120, 59);
+            this.org6.Size = new System.Drawing.Size(120, 64);
             this.org6.TabIndex = 116;
             this.org6.TabStop = false;
             this.org6.Click += new System.EventHandler(this.org6_Click);
             // 
             // org5
             // 
-            this.org5.Location = new System.Drawing.Point(1052, 598);
-            this.org5.Margin = new System.Windows.Forms.Padding(4);
+            this.org5.Location = new System.Drawing.Point(880, 545);
             this.org5.Name = "org5";
-            this.org5.Size = new System.Drawing.Size(120, 59);
+            this.org5.Size = new System.Drawing.Size(120, 64);
             this.org5.TabIndex = 115;
             this.org5.TabStop = false;
             this.org5.Click += new System.EventHandler(this.org5_Click);
             // 
             // org4
             // 
-            this.org4.Location = new System.Drawing.Point(873, 598);
-            this.org4.Margin = new System.Windows.Forms.Padding(4);
+            this.org4.Location = new System.Drawing.Point(749, 545);
             this.org4.Name = "org4";
-            this.org4.Size = new System.Drawing.Size(120, 59);
+            this.org4.Size = new System.Drawing.Size(120, 64);
             this.org4.TabIndex = 114;
             this.org4.TabStop = false;
             this.org4.Click += new System.EventHandler(this.org4_Click);
             // 
             // org3
             // 
-            this.org3.Location = new System.Drawing.Point(694, 598);
-            this.org3.Margin = new System.Windows.Forms.Padding(4);
+            this.org3.Location = new System.Drawing.Point(618, 545);
             this.org3.Name = "org3";
-            this.org3.Size = new System.Drawing.Size(120, 59);
+            this.org3.Size = new System.Drawing.Size(120, 64);
             this.org3.TabIndex = 113;
             this.org3.TabStop = false;
             this.org3.Click += new System.EventHandler(this.org3_Click);
             // 
             // org2
             // 
-            this.org2.Location = new System.Drawing.Point(515, 598);
-            this.org2.Margin = new System.Windows.Forms.Padding(4);
+            this.org2.Location = new System.Drawing.Point(487, 545);
             this.org2.Name = "org2";
-            this.org2.Size = new System.Drawing.Size(120, 59);
+            this.org2.Size = new System.Drawing.Size(120, 64);
             this.org2.TabIndex = 112;
             this.org2.TabStop = false;
             this.org2.Click += new System.EventHandler(this.org2_Click);
             // 
             // org1
             // 
-            this.org1.Location = new System.Drawing.Point(336, 598);
-            this.org1.Margin = new System.Windows.Forms.Padding(4);
+            this.org1.Location = new System.Drawing.Point(356, 545);
             this.org1.Name = "org1";
-            this.org1.Size = new System.Drawing.Size(120, 59);
+            this.org1.Size = new System.Drawing.Size(120, 64);
             this.org1.TabIndex = 111;
             this.org1.TabStop = false;
             this.org1.Click += new System.EventHandler(this.org1_Click);
             // 
             // par0
             // 
-            this.par0.Location = new System.Drawing.Point(157, 664);
-            this.par0.Margin = new System.Windows.Forms.Padding(4);
+            this.par0.Location = new System.Drawing.Point(224, 612);
             this.par0.Name = "par0";
-            this.par0.Size = new System.Drawing.Size(120, 59);
+            this.par0.Size = new System.Drawing.Size(120, 64);
             this.par0.TabIndex = 130;
             this.par0.TabStop = false;
             this.par0.Click += new System.EventHandler(this.par0_Click);
             // 
             // par9
             // 
-            this.par9.Location = new System.Drawing.Point(1768, 664);
-            this.par9.Margin = new System.Windows.Forms.Padding(4);
+            this.par9.Location = new System.Drawing.Point(1404, 612);
             this.par9.Name = "par9";
-            this.par9.Size = new System.Drawing.Size(120, 59);
+            this.par9.Size = new System.Drawing.Size(120, 64);
             this.par9.TabIndex = 129;
             this.par9.TabStop = false;
             this.par9.Click += new System.EventHandler(this.par9_Click);
             // 
             // par8
             // 
-            this.par8.Location = new System.Drawing.Point(1589, 664);
-            this.par8.Margin = new System.Windows.Forms.Padding(4);
+            this.par8.Location = new System.Drawing.Point(1273, 612);
             this.par8.Name = "par8";
-            this.par8.Size = new System.Drawing.Size(120, 59);
+            this.par8.Size = new System.Drawing.Size(120, 64);
             this.par8.TabIndex = 128;
             this.par8.TabStop = false;
             this.par8.Click += new System.EventHandler(this.par8_Click);
             // 
             // par7
             // 
-            this.par7.Location = new System.Drawing.Point(1410, 664);
-            this.par7.Margin = new System.Windows.Forms.Padding(4);
+            this.par7.Location = new System.Drawing.Point(1142, 612);
             this.par7.Name = "par7";
-            this.par7.Size = new System.Drawing.Size(120, 59);
+            this.par7.Size = new System.Drawing.Size(120, 64);
             this.par7.TabIndex = 127;
             this.par7.TabStop = false;
             this.par7.Click += new System.EventHandler(this.par7_Click);
             // 
             // par6
             // 
-            this.par6.Location = new System.Drawing.Point(1231, 664);
-            this.par6.Margin = new System.Windows.Forms.Padding(4);
+            this.par6.Location = new System.Drawing.Point(1011, 612);
             this.par6.Name = "par6";
-            this.par6.Size = new System.Drawing.Size(120, 59);
+            this.par6.Size = new System.Drawing.Size(120, 64);
             this.par6.TabIndex = 126;
             this.par6.TabStop = false;
             this.par6.Click += new System.EventHandler(this.par6_Click);
             // 
             // par5
             // 
-            this.par5.Location = new System.Drawing.Point(1052, 664);
-            this.par5.Margin = new System.Windows.Forms.Padding(4);
+            this.par5.Location = new System.Drawing.Point(880, 612);
             this.par5.Name = "par5";
-            this.par5.Size = new System.Drawing.Size(120, 59);
+            this.par5.Size = new System.Drawing.Size(120, 64);
             this.par5.TabIndex = 125;
             this.par5.TabStop = false;
             this.par5.Click += new System.EventHandler(this.par5_Click);
             // 
             // par4
             // 
-            this.par4.Location = new System.Drawing.Point(873, 664);
-            this.par4.Margin = new System.Windows.Forms.Padding(4);
+            this.par4.Location = new System.Drawing.Point(749, 612);
             this.par4.Name = "par4";
-            this.par4.Size = new System.Drawing.Size(120, 59);
+            this.par4.Size = new System.Drawing.Size(120, 64);
             this.par4.TabIndex = 124;
             this.par4.TabStop = false;
             this.par4.Click += new System.EventHandler(this.par4_Click);
             // 
             // par3
             // 
-            this.par3.Location = new System.Drawing.Point(694, 664);
-            this.par3.Margin = new System.Windows.Forms.Padding(4);
+            this.par3.Location = new System.Drawing.Point(618, 612);
             this.par3.Name = "par3";
-            this.par3.Size = new System.Drawing.Size(120, 59);
+            this.par3.Size = new System.Drawing.Size(120, 64);
             this.par3.TabIndex = 123;
             this.par3.TabStop = false;
             this.par3.Click += new System.EventHandler(this.par3_Click);
             // 
             // par2
             // 
-            this.par2.Location = new System.Drawing.Point(515, 664);
-            this.par2.Margin = new System.Windows.Forms.Padding(4);
+            this.par2.Location = new System.Drawing.Point(487, 612);
             this.par2.Name = "par2";
-            this.par2.Size = new System.Drawing.Size(120, 59);
+            this.par2.Size = new System.Drawing.Size(120, 64);
             this.par2.TabIndex = 122;
             this.par2.TabStop = false;
             this.par2.Click += new System.EventHandler(this.par2_Click);
             // 
             // par1
             // 
-            this.par1.Location = new System.Drawing.Point(336, 664);
-            this.par1.Margin = new System.Windows.Forms.Padding(4);
+            this.par1.Location = new System.Drawing.Point(356, 612);
             this.par1.Name = "par1";
-            this.par1.Size = new System.Drawing.Size(120, 59);
+            this.par1.Size = new System.Drawing.Size(120, 64);
             this.par1.TabIndex = 121;
             this.par1.TabStop = false;
             this.par1.Click += new System.EventHandler(this.par1_Click);
@@ -584,62 +514,118 @@
             // 
             this.dummy.Enabled = true;
             this.dummy.Location = new System.Drawing.Point(508, 220);
-            this.dummy.Margin = new System.Windows.Forms.Padding(4);
             this.dummy.Name = "dummy";
             this.dummy.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("dummy.OcxState")));
             this.dummy.Size = new System.Drawing.Size(1, 1);
             this.dummy.TabIndex = 131;
             // 
-            // fade
+            // bgm
             // 
-            this.fade.Location = new System.Drawing.Point(1233, 742);
-            this.fade.Margin = new System.Windows.Forms.Padding(4);
-            this.fade.Name = "fade";
-            this.fade.Size = new System.Drawing.Size(326, 100);
-            this.fade.TabIndex = 132;
-            this.fade.TabStop = false;
-            this.fade.Click += new System.EventHandler(this.fade_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(1793, 889);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox1.TabIndex = 1001;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            this.bgm.Location = new System.Drawing.Point(1449, 710);
+            this.bgm.Name = "bgm";
+            this.bgm.Size = new System.Drawing.Size(75, 80);
+            this.bgm.TabIndex = 1001;
+            this.bgm.TabStop = false;
+            this.bgm.Click += new System.EventHandler(this.bgm_Click);
             // 
             // musicList
             // 
+            this.musicList.Font = new System.Drawing.Font("游ゴシック Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.musicList.FormattingEnabled = true;
-            this.musicList.ItemHeight = 15;
-            this.musicList.Location = new System.Drawing.Point(1566, 850);
+            this.musicList.ItemHeight = 16;
+            this.musicList.Location = new System.Drawing.Point(1368, 680);
+            this.musicList.Margin = new System.Windows.Forms.Padding(2);
             this.musicList.Name = "musicList";
-            this.musicList.Size = new System.Drawing.Size(327, 23);
+            this.musicList.Size = new System.Drawing.Size(154, 24);
             this.musicList.TabIndex = 1002;
             this.musicList.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // Listen
             // 
-            this.Listen.Location = new System.Drawing.Point(1566, 889);
-            this.Listen.Margin = new System.Windows.Forms.Padding(4);
+            this.Listen.Location = new System.Drawing.Point(1368, 710);
             this.Listen.Name = "Listen";
-            this.Listen.Size = new System.Drawing.Size(100, 100);
+            this.Listen.Size = new System.Drawing.Size(75, 80);
             this.Listen.TabIndex = 1003;
             this.Listen.TabStop = false;
             this.Listen.Click += new System.EventHandler(this.Listen_Click);
             // 
+            // TotalTime
+            // 
+            this.TotalTime.AutoSize = true;
+            this.TotalTime.Font = new System.Drawing.Font("小塚ゴシック Pro R", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.TotalTime.Location = new System.Drawing.Point(806, 64);
+            this.TotalTime.Name = "TotalTime";
+            this.TotalTime.Size = new System.Drawing.Size(75, 36);
+            this.TotalTime.TabIndex = 1004;
+            this.TotalTime.Text = "Time";
+            // 
+            // interval
+            // 
+            this.interval.Location = new System.Drawing.Point(281, 47);
+            this.interval.Maximum = 20;
+            this.interval.Minimum = 4;
+            this.interval.Name = "interval";
+            this.interval.Size = new System.Drawing.Size(502, 45);
+            this.interval.TabIndex = 1005;
+            this.interval.Value = 4;
+            this.interval.Scroll += new System.EventHandler(this.interval_Scroll);
+            // 
+            // current
+            // 
+            this.current.AutoSize = true;
+            this.current.Font = new System.Drawing.Font("小塚ゴシック Pro R", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.current.Location = new System.Drawing.Point(224, 444);
+            this.current.Name = "current";
+            this.current.Size = new System.Drawing.Size(78, 32);
+            this.current.TabIndex = 1006;
+            this.current.Text = "0：00";
+            // 
+            // all
+            // 
+            this.all.AutoSize = true;
+            this.all.Font = new System.Drawing.Font("小塚ゴシック Pro R", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.all.Location = new System.Drawing.Point(377, 444);
+            this.all.Name = "all";
+            this.all.Size = new System.Drawing.Size(78, 32);
+            this.all.TabIndex = 1007;
+            this.all.Text = "0：00";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("小塚ゴシック Pro R", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label3.Location = new System.Drawing.Point(321, 444);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(39, 32);
+            this.label3.TabIndex = 1008;
+            this.label3.Text = "／";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("小塚ゴシック Pro R", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label1.Location = new System.Drawing.Point(925, 64);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(42, 36);
+            this.label1.TabIndex = 1009;
+            this.label1.Text = "秒";
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1906, 1002);
+            this.ClientSize = new System.Drawing.Size(1534, 802);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.all);
+            this.Controls.Add(this.current);
+            this.Controls.Add(this.interval);
+            this.Controls.Add(this.TotalTime);
             this.Controls.Add(this.Listen);
             this.Controls.Add(this.musicList);
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.fade);
+            this.Controls.Add(this.bgm);
             this.Controls.Add(this.par0);
             this.Controls.Add(this.par9);
             this.Controls.Add(this.par8);
@@ -678,20 +664,13 @@
             this.Controls.Add(this.ParView);
             this.Controls.Add(this.OrgView);
             this.Controls.Add(this.TopView);
-            this.Controls.Add(this.trackBar1);
-            this.Controls.Add(this.PlaySpeed);
-            this.Controls.Add(this.PlaySpeedValue);
             this.Controls.Add(this.Select);
             this.Controls.Add(this.dummy);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Resize += new System.EventHandler(this.Form1_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.Select)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PlaySpeedValue)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PlaySpeed)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TopView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.OrgView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ParView)).EndInit();
@@ -730,9 +709,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.par2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.par1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dummy)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fade)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bgm)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Listen)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.interval)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -741,9 +720,6 @@
         #endregion
 
         private System.Windows.Forms.PictureBox Select;
-        private System.Windows.Forms.PictureBox PlaySpeedValue;
-        private System.Windows.Forms.PictureBox PlaySpeed;
-        private System.Windows.Forms.TrackBar trackBar1;
         private AxWMPLib.AxWindowsMediaPlayer TopView;
         private AxWMPLib.AxWindowsMediaPlayer OrgView;
         private AxWMPLib.AxWindowsMediaPlayer ParView;
@@ -787,10 +763,15 @@
         private System.Windows.Forms.PictureBox par2;
         private System.Windows.Forms.PictureBox par1;
         private AxWMPLib.AxWindowsMediaPlayer dummy;
-        private System.Windows.Forms.PictureBox fade;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox bgm;
         private System.Windows.Forms.ComboBox musicList;
         private System.Windows.Forms.PictureBox Listen;
+        private System.Windows.Forms.Label TotalTime;
+        private System.Windows.Forms.TrackBar interval;
+        private System.Windows.Forms.Label current;
+        private System.Windows.Forms.Label all;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label1;
     }
 }
 
